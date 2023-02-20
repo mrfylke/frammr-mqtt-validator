@@ -9,24 +9,30 @@ import type { SchemaNames } from "./types";
 const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
 
-// console.log(spec);
-const validate = await readSpecification("position");
-const isValid = validate({
-  atDateTime: "2023-02-06T12:45:50+01:00",
-  position: {
-    latitude: "dsa",
-    longitude: 0,
-  },
-});
-
-if (isValid) {
-  console.log("✅ Valid JSON Document");
-  process.exit(0);
-} else {
-  validate.errors
-    ?.map((error) => `❌ Error: ${error.instancePath} ${error.message}`)
-    .forEach((l) => console.log(l));
-  process.exit(1);
+type ValidationOutput =
+  | {
+      error: false;
+    }
+  | {
+      error: true;
+      errorData: ValidateFunction["errors"];
+    };
+export default async function validate(
+  schema: SchemaNames,
+  json: any
+): Promise<ValidationOutput> {
+  const doValidate = await readSpecification(schema);
+  const isValid = doValidate(json);
+  if (isValid) {
+    return {
+      error: false,
+    };
+  } else {
+    return {
+      error: true,
+      errorData: doValidate.errors,
+    };
+  }
 }
 
 async function readSpecification(

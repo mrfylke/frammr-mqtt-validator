@@ -1,12 +1,20 @@
 {
-  "name": "mtbuss-mqtt-validator",
+  "name": "@frammr/mqtt-validator",
   "version": "1.0.0",
   "description": "Test client for validating MQTT messages for MT Buss",
-  "main": "index.js",
+  "main": "lib/tools/validate.js",
+  "types": "lib/tools/validate.d.ts",
   "license": "EUPL-1.2",
+  "bin": "lib/tools/bin.js",
+  "files": [
+    "lib/tools/*",
+    "!lib/tools/generate-types.js",
+    "!lib/tools/generate-types.d.ts",
+    "specifications/*"
+  ],
   "scripts": {
     "start": "NODE_NO_WARNINGS=1 node --loader @swc-node/register/esm src/server.ts",
-    "validate": "NODE_NO_WARNINGS=1 node --loader @swc-node/register/esm tools/validate.ts",
+    "validate": "NODE_NO_WARNINGS=1 node --loader @swc-node/register/esm tools/bin.ts",
     "generate-types": "NODE_NO_WARNINGS=1  node --loader @swc-node/register/esm tools/generate-types.ts",
     "build": "tsc"
   },
