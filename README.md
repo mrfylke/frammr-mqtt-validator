@@ -17,7 +17,7 @@ Usage: npx @frammr/mqtt-validator -s [position] -f [file]
 
 Options:
       --version  Show version number                                   [boolean]
-  -f, --file      file to validate                                    [required]
+  -f, --file     file to validate                                     [required]
   -s, --schema   choose a schema                [required] [choices: "position"]
   -h, --help     Show help                                             [boolean]
 
