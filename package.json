@@ -17,6 +17,7 @@
     "cli": "node -r @swc-node/register tools/bin.ts",
     "generate-types": "node -r @swc-node/register tools/generate-types.ts",
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "test": "vitest"
   },
   "devDependencies": {
