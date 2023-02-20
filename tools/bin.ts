@@ -10,10 +10,7 @@ main();
 
 async function main() {
   const opts = await yargs(hideBin(process.argv))
-    .command(
-      "--schema <position> --file <file>",
-      "Validate given JSON-file by schema."
-    )
+    .usage("Usage: $0 -s [position] -f [file]")
     .example(
       "$0 -s position -f foo.json",
       "Validate foo.json with position specification"
