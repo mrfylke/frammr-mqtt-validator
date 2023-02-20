@@ -1,0 +1,6 @@
+{
+  "extends": "@tsconfig/node-lts-strictest-esm/tsconfig.json",
+  "compilerOptions": {},
+  "include": ["src", "tools"],
+  "exclude": ["node_modules"]
+}
