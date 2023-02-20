@@ -24,8 +24,8 @@ async function generate() {
   const schemaNames = files.map((i) => `'${i.basename}'`).join(" | ");
 
   const types = `
-export const schemas = ${JSON.stringify(basenames)};
 export type SchemaNames = ${schemaNames};
+export const schemas = ${JSON.stringify(basenames)} as SchemaNames[];
 `;
 
   await writeFile(join(__dirname, "types.ts"), types);

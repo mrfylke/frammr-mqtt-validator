@@ -3,7 +3,7 @@
 import { readFile } from "fs/promises";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { SchemaNames, schemas } from "./types";
+import { schemas } from "./types";
 import validate from "./validate";
 
 main();
@@ -22,7 +22,7 @@ async function main() {
     .option("schema", {
       alias: "s",
       describe: "choose a schema",
-      choices: schemas as SchemaNames[],
+      choices: schemas,
     })
     .demandOption(
       ["file", "schema"],

@@ -42,9 +42,14 @@ async function readSpecification(
     join(__dirname, "..", "specifications", `${filename}.json`)
   );
   try {
-    return ajv.compile(JSON.parse(spec.toString()));
+    const parsed = JSON.parse(spec.toString());
+    const previous = ajv.getSchema(parsed["$id"]);
+    if (previous) {
+      return previous;
+    } else {
+      return ajv.compile(parsed);
+    }
   } catch (err) {
-    console.error(`error: ${err}`);
-    process.exit(2);
+    throw new Error(`Unable to load or parse ${err}`);
   }
 }

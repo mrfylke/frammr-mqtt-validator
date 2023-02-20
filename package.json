@@ -16,7 +16,8 @@
     "start": "node -r @swc-node/register src/server.ts",
     "cli": "node -r @swc-node/register tools/bin.ts",
     "generate-types": "node -r @swc-node/register tools/generate-types.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest"
   },
   "devDependencies": {
     "@swc-node/register": "^1.6.2",
@@ -25,7 +26,8 @@
     "@types/node": "^18.13.0",
     "@types/yargs": "^17.0.22",
     "ajv-formats": "^2.1.1",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "vitest": "^0.28.5"
   },
   "dependencies": {
     "ajv": "^8.12.0",
