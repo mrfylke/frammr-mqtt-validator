@@ -38,14 +38,12 @@ export default async function validate(
 async function readSpecification(
   filename: SchemaNames
 ): Promise<ValidateFunction> {
-  const dirname = new URL(".", import.meta.url).pathname;
   const spec = await readFile(
-    join(dirname, "..", "specifications", `${filename}.json`)
+    join(__dirname, "..", "specifications", `${filename}.json`)
   );
   try {
     return ajv.compile(JSON.parse(spec.toString()));
   } catch (err) {
-    console.log("dsadsa");
     console.error(`error: ${err}`);
     process.exit(2);
   }
