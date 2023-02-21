@@ -152,3 +152,19 @@ For the final source of truth check out the [specifications](./specifications).
   "code": "<base64-encoded-code>"
 }
 ```
+
+## Adding new Specifications
+
+Add specifications in the `./specifications` folder. Specifications are written
+using JSON Schema draft 7.
+
+Every specification should have corresponding test fixture in `./tests/fixtures`
+in the following naming convention:
+
+```
+<spec>.fail.json
+<spec>.ok.json
+```
+
+Where `.fail.json` is a fixture intended to fail validation and `.ok.json`
+should be validated successfully.
