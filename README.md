@@ -1,5 +1,7 @@
 # MT Buss MQTT Validator
 
+> OBS: This repo is a work in progress and will change in the comming weeks.
+
 This repo contains a test validation client for MQTT communication for hardware
 devices intended for busses in Møre og Romsdal by FRAM. You can use the code and
 specification files here to test implementations on hardware or software. See
