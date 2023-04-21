@@ -6,6 +6,8 @@ import type { SchemaNames } from "../tools/types";
 import validate from "../tools/validate";
 import config from "./config";
 
+// TODO SHOW ERROR
+
 // Adds all supported topics and their corresponding schemas
 const SUPPORTED_TOPICS: Record<string, SchemaNames> = {
   "/gps/position": "position",

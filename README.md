@@ -7,6 +7,12 @@ devices intended for busses in Møre og Romsdal by FRAM. You can use the code an
 specification files here to test implementations on hardware or software. See
 details on running the project as a JSON validator or a MQTT client below.
 
+## Structure of this repo
+
+- All specification descriptions found in [/documents](./documents/)
+  - See also template: [/documents/\_template.md](./documents/_template.md)
+- All specification found in [/specifications](./specifications/)
+
 ## CLI tooling
 
 Given that you have installed Node.js on your system, you can use this package
@@ -170,3 +176,16 @@ in the following naming convention:
 
 Where `.fail.json` is a fixture intended to fail validation and `.ok.json`
 should be validated successfully.
+
+## Prior work
+
+Other similar work that is used as inspiration.
+
+- Ruter
+  - https://ruter.atlassian.net/wiki/spaces/DS/pages/1961689089/Salg+billettering+3.0
+  - https://github.com/RuterNo/adt-doc/tree/master/docs/v2.6.0/json-schemas
+  - https://github.com/RuterNo/adt-doc
+- ITxPT
+  - https://wiki.itxpt.org/index.php/S02P10-APC-2_preview#MQTT_parameters
+- Samverkansgruppen Validation Services messages
+  - https://github.com/mobileticket/vals-schemata
