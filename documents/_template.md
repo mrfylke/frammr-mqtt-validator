@@ -16,7 +16,7 @@ lastUpdated: 2023-05-01
 ### Topic: `{Topic}`
 
 - Inbound to client / Outbound from client
-- Specification Link: [file.json]()
+- JSON Schema: [file.json]()
 
 #### Description
 
