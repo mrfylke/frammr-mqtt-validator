@@ -1,3 +1,2 @@
-
-export type SchemaNames = 'position';
-export const schemas = ["position"] as SchemaNames[];
+export type SchemaNames = undefined;
+export const schemas = [] as SchemaNames[];
