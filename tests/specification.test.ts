@@ -2,6 +2,10 @@ import { expect, test } from "vitest";
 import { SchemaNames, schemas } from "../tools/types";
 import validate from "../tools/validate";
 
+if (!schemas.length) {
+  test("No tests", () => expect(true).toBe(true));
+}
+
 for (let spec of schemas) {
   test.each`
     outcome   | expected
