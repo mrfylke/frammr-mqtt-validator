@@ -1,0 +1,58 @@
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+template: |
+  # What's changed
+  $CHANGES
+
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+
+categories:
+  - title: "Breaking changes"
+    label: "breaking"
+  - title: "New features"
+    label: "feature"
+  - title: "New specification"
+    label: "specification"
+  - title: "Bug fixes"
+    label: "bug"
+  - title: "Maintenance"
+    label: "chore"
+  - title: "Code tools"
+    label: "code"
+
+version-resolver:
+  major:
+    labels:
+      - "breaking"
+  minor:
+    labels:
+      - "feature"
+      - "specification"
+  patch:
+    labels:
+      - "bug"
+
+exclude-labels:
+  - "skip-changelog"
+
+commitish: "refs/heads/main"
+
+autolabeler:
+  - label: "chore"
+    title:
+      - "/chore:/"
+  - label: "bug"
+    title:
+      - "/fix:/"
+  - label: "feature"
+    title:
+      - "/feat:/"
+  - label: "specification"
+    title:
+      - "/spec:/"
+  - label: "code"
+    title:
+      - "/code:/"
+  - label: "breaking"
+    title:
+      - "/breaking-change:/"
