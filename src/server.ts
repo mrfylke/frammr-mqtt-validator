@@ -9,9 +9,7 @@ import config from "./config";
 // TODO SHOW ERROR
 
 // Adds all supported topics and their corresponding schemas
-const SUPPORTED_TOPICS: Record<string, SchemaNames> = {
-  "/gps/position": "position",
-};
+const SUPPORTED_TOPICS: Record<string, SchemaNames> = {};
 
 const hasAdditionalConfig = Object.keys(config).length > 0;
 
