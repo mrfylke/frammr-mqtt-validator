@@ -2,17 +2,21 @@ name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
 template: |
   # What's changed
+
   $CHANGES
 
-  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+  ---
+
+  **Contributors**: $CONTRIBUTORS
+  **Full Changelog**: [$PREVIOUS_TAG...v$RESOLVED_VERSION](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION)
 
 categories:
   - title: "Breaking changes"
     label: "breaking"
-  - title: "New features"
-    label: "feature"
   - title: "New specification"
     label: "specification"
+  - title: "New features"
+    label: "feature"
   - title: "Bug fixes"
     label: "bug"
   - title: "Maintenance"
