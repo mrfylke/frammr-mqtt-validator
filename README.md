@@ -21,18 +21,18 @@ as a CLI for validationg local JSON-files. See documentation on usage
 ### Usage
 
 ```
-Usage: npx @frammr/mqtt-validator -s [position] -f [file]
+Usage: npx @frammr/mqtt-validator -t [topic] -f [file]
 
 Options:
       --version  Show version number                                   [boolean]
   -f, --file     file to validate                                     [required]
-  -s, --schema   choose a schema                [required] [choices: "position"]
+  -t, --topic    choose a topic                         [required] [choices: ""]
   -h, --help     Show help                                             [boolean]
 
 Examples:
-  Validate foo.json with position specification
+  Validate foo.json with location specification
 
-    npx @frammr/mqtt-validator -s position -f foo.json
+    npx @frammr/mqtt-validator -t sensors/gnss/location -f foo.json
 ```
 
 ## MQTT Client
