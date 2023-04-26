@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 
 import addFormats from "ajv-formats";
-import type { SchemaNames } from "./types";
+import type { TopicName } from "./types";
 
 const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
@@ -18,10 +18,10 @@ type ValidationOutput =
       errorData: ValidateFunction["errors"];
     };
 export default async function validate(
-  schema: SchemaNames,
+  topic: TopicName,
   json: any
 ): Promise<ValidationOutput> {
-  const doValidate = await readSpecification(schema);
+  const doValidate = await readSpecification(topic);
   const isValid = doValidate(json);
   if (isValid) {
     return {
@@ -35,11 +35,9 @@ export default async function validate(
   }
 }
 
-async function readSpecification(
-  filename: SchemaNames
-): Promise<ValidateFunction> {
+async function readSpecification(topic: TopicName): Promise<ValidateFunction> {
   const spec = await readFile(
-    join(__dirname, "..", "specifications", `${filename}.json`)
+    join(__dirname, "..", "specifications", `${topic}.json`)
   );
   try {
     const parsed = JSON.parse(spec.toString());
