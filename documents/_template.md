@@ -17,6 +17,7 @@ lastUpdated: 2023-05-01
 
 - Inbound to client / Outbound from client
 - JSON Schema: [file.json]()
+- MQTT QoS: 0 / 1 / 2
 
 #### Description
 
