@@ -1,31 +1,20 @@
-import { readdir, writeFile } from "fs/promises";
-import { basename, join } from "path";
+import { writeFile } from "fs/promises";
+import { join } from "path";
+import listSpecifications from "./fs-to-topics";
 
 generate().then(() => {
   console.log("Generated types");
 });
 
-async function getAllFiles() {
-  const files = await readdir(join(__dirname, "..", "specifications"));
-
-  return files
-    .filter((fn) => fn.endsWith(".json"))
-    .map((filename) => ({
-      fullPath: join(__dirname, filename),
-      basename: basename(filename, ".json"),
-      filename,
-    }));
-}
-
 async function generate() {
-  const files = await getAllFiles();
-
-  const basenames = files.map((i) => i.basename);
-  const schemaNames = files.map((i) => `'${i.basename}'`).join(" | ");
+  const topics = await listSpecifications();
+  const schemaNames = topics.map((i) => `'${i}'`).join(" | ");
 
   const types = `
-export type SchemaNames = ${schemaNames};
-export const schemas = ${JSON.stringify(basenames)} as SchemaNames[];
+export type TopicName = ${schemaNames};
+export const availableTopics = ${JSON.stringify(
+    topics
+  )} as readonly TopicName[];
 `;
 
   await writeFile(join(__dirname, "types.ts"), types);

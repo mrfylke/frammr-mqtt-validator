@@ -2,14 +2,14 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import mqtt, { MqttClient } from "mqtt";
-import type { SchemaNames } from "../tools/types";
+import { availableTopics } from "../tools/types";
 import validate from "../tools/validate";
 import config from "./config";
 
 // TODO SHOW ERROR
 
 // Adds all supported topics and their corresponding schemas
-const SUPPORTED_TOPICS: Record<string, SchemaNames> = {};
+const SUPPORTED_TOPICS = availableTopics;
 
 const hasAdditionalConfig = Object.keys(config).length > 0;
 
@@ -32,7 +32,7 @@ client.on("connect", () => {
     `  Subscribing to topics: ${Object.keys(SUPPORTED_TOPICS).join(", ")}`
   );
   // Add subscription to all topics...
-  for (let topic of Object.keys(SUPPORTED_TOPICS)) {
+  for (let topic of SUPPORTED_TOPICS) {
     client.subscribe(topic, function (err) {
       if (err) {
         console.error(`Unable to subscribe to topic ${topic}: ${err.message}`);
@@ -42,7 +42,7 @@ client.on("connect", () => {
 });
 
 client.on("message", async function (topic, message) {
-  const schema = SUPPORTED_TOPICS[topic];
+  const schema = SUPPORTED_TOPICS.find((i) => i == topic);
   if (!schema) {
     return console.warn(`[topic: ${topic}]: Unknown topic. Ignoring message`);
   }

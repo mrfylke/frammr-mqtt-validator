@@ -3,12 +3,15 @@
 import { readFile } from "fs/promises";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { schemas } from "./types";
+import { availableTopics } from "./types";
 import validate from "./validate";
+import listSpecifications from "./fs-to-topics";
 
 main();
 
 async function main() {
+  await listSpecifications();
+
   const opts = await yargs(hideBin(process.argv))
     .usage("Usage: $0 -s [position] -f [file]")
     .example(
@@ -19,13 +22,13 @@ async function main() {
       alias: "f",
       describe: "file to validate",
     })
-    .option("schema", {
-      alias: "s",
-      describe: "choose a schema",
-      choices: schemas,
+    .option("topic", {
+      alias: "t",
+      describe: "choose a topic",
+      choices: availableTopics,
     })
     .demandOption(
-      ["file", "schema"],
+      ["file", "topic"],
       "Please provide both scheme and file arguments"
     )
     .help("h")
@@ -33,7 +36,7 @@ async function main() {
     .coerce("file", readLocalFile)
     .parse();
 
-  const validationData = await validate(opts.schema, opts.file);
+  const validationData = await validate(opts.topic, opts.file);
 
   if (!validationData.error) {
     console.log("");

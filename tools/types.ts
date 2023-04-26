@@ -1,2 +1,2 @@
-export type SchemaNames = undefined;
-export const schemas = [] as SchemaNames[];
+export type TopicName = "";
+export const availableTopics = [] as readonly TopicName[];

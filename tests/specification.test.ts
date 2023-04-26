@@ -1,12 +1,12 @@
 import { expect, test } from "vitest";
-import { SchemaNames, schemas } from "../tools/types";
+import { TopicName, availableTopics } from "../tools/types";
 import validate from "../tools/validate";
 
-if (!schemas.length) {
+if (!availableTopics.length) {
   test("No tests", () => expect(true).toBe(true));
 }
 
-for (let spec of schemas) {
+for (let spec of availableTopics) {
   test.each`
     outcome   | expected
     ${"fail"} | ${true}
@@ -18,10 +18,10 @@ for (let spec of schemas) {
     }
   );
 }
-async function helper_validate(spec: SchemaNames, failOrOk: "fail" | "ok") {
+async function helper_validate(spec: TopicName, failOrOk: "fail" | "ok") {
   const valid = await validate(
     spec,
-    require(`./fixtures/${spec}.${failOrOk}.json`)
+    require(`./fixtures/${spec}/${failOrOk}.json`)
   );
   return valid.error;
 }
