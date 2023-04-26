@@ -1,5 +1,12 @@
 {
   "latitudeDegree": 62.734393,
   "longitudeDegree": 7.150033,
-  "fixDateTime": "2023-09-01T23:45:52Z"
+  "fixDateTime": "2023-09-01T23:45:52Z",
+  "altitude": 124,
+  "messageNumber": 12345,
+  "speedOverGround": 15.3,
+  "trackDegreeTrue": 324,
+  "signalQuality": 1,
+  "numberOfSatellites": 12,
+  "hdop": 2.4
 }
