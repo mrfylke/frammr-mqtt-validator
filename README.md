@@ -13,6 +13,15 @@ details on running the project as a JSON validator or a MQTT client below.
   - See also template: [/documents/\_template.md](./documents/_template.md)
 - All specification found in [/specifications](./specifications/)
 
+### Topic tree
+
+```
+/
+└── sensors
+    └── gnss
+        └── location
+```
+
 ## CLI tooling
 
 Given that you have installed Node.js on your system, you can use this package
