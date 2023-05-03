@@ -1,6 +1,6 @@
 ---
 version: 1.0.0
-lastUpdated: 2023-05-01
+lastUpdated: 2023-05-03
 ---
 
 # Specification: Location
@@ -9,15 +9,11 @@ Provides periodic GPS location data specified in decimal format by latitude and
 longitude. Should be send once every second. No need for a MQTT QoS guarantee as
 package loss is acceptable.
 
-## Topics
-
-- `/sensors/gnss/location`
-
-### Topic: `/sensors/gnss/location`
-
-- Inbound to client
-- JSON Schema: [sensors/gnss/location.json](../sensors/gnss/location.json)
+- Topic: `/sensors/location`
+- Direction: Publish (Inbound to client)
+- JSON Schema: [location.schema.json](./location.schema.json)
 - MQTT QoS: 0 (Default)
+- Interval: Atleast once per second
 
 #### Description
 
@@ -27,9 +23,10 @@ Provided periodic location data.
 
 ```json
 {
+  "traceId": "48b12d1f-6b96-4f70-94f9-f785cef96812",
+  "eventTimestamp": "2023-09-01T23:45:52Z",
   "latitudeDegree": 62.734393,
   "longitudeDegree": 7.150033,
-  "fixDateTime": "2023-09-01T23:45:52Z",
   "altitude": 124,
   "messageNumber": 12345,
   "speedOverGround": 15.3,
@@ -46,4 +43,4 @@ Provided periodic location data.
 
 Specification based on and should be compatible with Ruter specification. As
 such it it is licensed under Apache License 2.0 and originally
-[created by Ruter AS](https://github.com/RuterNo/adt-doc/blob/master/docs/v2.6.0/json-schemas/location.json).
+[created by Ruter AS](https://github.com/RuterNo/adt-doc/tree/3.x/asyncapi/json-schemas/sensors/location).
