@@ -18,8 +18,7 @@ details on running the project as a JSON validator or a MQTT client below.
 ```
 /
 └── sensors
-    └── gnss
-        └── location
+    └── location
 ```
 
 ## CLI tooling
