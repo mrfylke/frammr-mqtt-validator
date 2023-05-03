@@ -163,15 +163,7 @@ For the final source of truth check out the [specifications](./specifications).
 
 ## Adding new Specifications
 
-Add specifications in the `./specifications` folder. Specifications are written
-using JSON Schema draft 7. Place specifications in corresponding nested topic
-names as paths. Example topic `sensors/location` will be
-`specifications/sensors/location.json`.
-
-Every specification should have corresponding test fixture in
-`./tests/fixtures/[topic/name/here]/(fail|ok).json`. Where `fail.json` is a
-fixture intended to fail validation and `ok.json` should be validated
-successfully.
+See documentation [specifications/README.md](./specifications/README.md).
 
 ## Prior work
 

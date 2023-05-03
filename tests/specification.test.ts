@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { TopicName, availableTopics } from "../tools/types";
+import { TopicName, availableTopics, topicSet } from "../tools/types";
 import validate from "../tools/validate";
 
 if (!availableTopics.length) {
@@ -8,9 +8,9 @@ if (!availableTopics.length) {
 
 for (let spec of availableTopics) {
   test.each`
-    outcome   | expected
-    ${"fail"} | ${true}
-    ${"ok"}   | ${false}
+    outcome      | expected
+    ${"fail"}    | ${true}
+    ${"example"} | ${false}
   `(
     `[specification: ${spec}]: case $outcome -> $expected`,
     async ({ outcome, expected }) => {
@@ -18,10 +18,14 @@ for (let spec of availableTopics) {
     }
   );
 }
-async function helper_validate(spec: TopicName, failOrOk: "fail" | "ok") {
-  const valid = await validate(
-    spec,
-    require(`./fixtures/${spec}/${failOrOk}.json`)
+async function helper_validate(
+  spec: TopicName,
+  failOrExample: "fail" | "example"
+) {
+  const fixture = `../specifications/${topicSet[spec]}`.replace(
+    "schema.json",
+    `${failOrExample}.json`
   );
+  const valid = await validate(spec, require(fixture));
   return valid.error;
 }

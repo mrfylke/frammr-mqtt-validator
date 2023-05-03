@@ -4,7 +4,7 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 
 import addFormats from "ajv-formats";
-import type { TopicName } from "./types";
+import { TopicName, topicSet } from "./types";
 
 const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
@@ -37,7 +37,7 @@ export default async function validate(
 
 async function readSpecification(topic: TopicName): Promise<ValidateFunction> {
   const spec = await readFile(
-    join(__dirname, "..", "specifications", `${topic}.json`)
+    join(__dirname, "..", "specifications", topicSet[topic])
   );
   try {
     const parsed = JSON.parse(spec.toString());

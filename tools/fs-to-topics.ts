@@ -1,8 +1,16 @@
 import { fdir } from "fdir";
+import { dirname } from "path";
 
-const crawler = new fdir().withRelativePaths().glob("./**/*.json");
+const crawler = new fdir().withRelativePaths().glob("./**/*.schema.json");
 
-export default async function listSpecifications(): Promise<string[]> {
+export default async function listSpecifications(): Promise<
+  Record<string, string>
+> {
   const data = await crawler.crawl("specifications").withPromise();
-  return data.map((file) => file.replace(/\.json$/, ""));
+
+  const obj: Record<string, string> = {};
+  for (let schema of data) {
+    obj[dirname(schema)] = schema;
+  }
+  return obj;
 }
