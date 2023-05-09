@@ -1,0 +1,13 @@
+{
+  "traceId": "48b12d1f-6b96-4f70-94f9-f785cef96812",
+  "eventTimestamp": "2023-09-01T23:45:52Z",
+  "latitudeDegree": 62.734393,
+  "longitudeDegree": 7.150033,
+  "altitude": 124,
+  "messageNumber": 12345,
+  "speedOverGround": 15.3,
+  "trackDegreeTrue": 324,
+  "signalQuality": 1,
+  "numberOfSatellites": 12,
+  "hdop": 2.4
+}

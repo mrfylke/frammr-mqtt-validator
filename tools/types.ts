@@ -1,4 +1,4 @@
 
-export type TopicName = '';
-export const availableTopics = [] as readonly TopicName[];
-export const topicSet = {"":""} satisfies Record<TopicName, string>;
+export type TopicName = 'sensors/location';
+export const availableTopics = ["sensors/location"] as readonly TopicName[];
+export const topicSet = {"sensors/location":"sensors/location/location.schema.json"} satisfies Record<TopicName, string>;
