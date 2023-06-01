@@ -5,30 +5,28 @@
   "type": "object",
   "description": "A barcode containing account tokens to be validated.",
   "properties": {
-    "traceId":{
+    "traceId": {
       "$id": "#/properties/traceId",
       "type": "string",
       "format": "uuid",
-      "description": "An unique message identifier - UUID"
+      "description": "An unique message identifier - UUID v4"
     },
-    "eventTimeStamp":{
+    "eventTimeStamp": {
       "$id": "#/properties/eventTimeStamp",
       "type": "string",
       "format": "date-time",
-      "description": "Time stamp for the time the barcode was read."
+      "description": "Time stamp for the time the barcode was read. UTC in RFC3339 format."
     },
-    "deviceId":{
+    "deviceId": {
       "$id": "#/properties/deviceId",
       "type": "string",
-      "description": "Unique device identifier"
+      "description": "Unique device identifier. Unique for local system (in bus)"
     },
     "barcode": {
       "$id": "#/properties/barcode",
       "type": "string",
-      "description": "Base64 encoded content from barcode."
+      "description": "Base64 URL (without padding) encoded content from barcode."
     }
   },
-  "required": [
-    "traceId","deviceId","eventTimeStamp","barcode"
-  ]
+  "required": ["traceId", "deviceId", "eventTimeStamp", "barcode"]
 }
