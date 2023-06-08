@@ -10,7 +10,7 @@ referencing an account containing possible travel rights.
 
 Barcode should be transmitted as base64 encoded URL string without padding.
 
-- Topic: `validators/[deviceId]/barcode`
+- Topic: `validators/barcode`
 - Direction: Publish (Inbound to client)
 - JSON Schema: [barcode.schema.json](./barcode.schema.json.json)
 - MQTT QoS: 1 (at least once)

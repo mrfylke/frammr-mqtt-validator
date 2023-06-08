@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/[deviceId]/barcode.json",
+  "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/barcode.json",
   "title": "Barcode Validation Request",
   "type": "object",
   "description": "A barcode containing account tokens to be validated.",
