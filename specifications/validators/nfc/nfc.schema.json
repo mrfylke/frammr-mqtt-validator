@@ -11,7 +11,7 @@
       "format": "uuid",
       "description": "An unique message identifier - UUID v4"
     },
-    "eventTimeStamp": {
+    "eventTimestamp": {
       "$id": "#/properties/eventTimeStamp",
       "type": "string",
       "format": "date-time",
