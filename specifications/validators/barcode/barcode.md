@@ -5,7 +5,7 @@ lastUpdated: 2023-06-01
 
 # Specification: barcode
 
-Passenger want to use the service and presents his barcode containing a token
+Passenger want to use the service and presents their barcode containing a token
 referencing an account containing possible travel rights.
 
 Barcode should be transmitted as base64 encoded URL string without padding.
