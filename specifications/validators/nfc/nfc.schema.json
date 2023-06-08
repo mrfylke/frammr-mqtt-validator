@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/nfc/token.schema.json",
+  "title": "NFC Validation Request",
+  "type": "object",
+  "description": "Validating NFC card containing account tokens to be validated.",
+  "properties": {
+    "traceId": {
+      "$id": "#/properties/traceId",
+      "type": "string",
+      "format": "uuid",
+      "description": "An unique message identifier - UUID v4"
+    },
+    "eventTimeStamp": {
+      "$id": "#/properties/eventTimeStamp",
+      "type": "string",
+      "format": "date-time",
+      "description": "Time stamp for the time the barcode was read. UTC in RFC3339 format."
+    },
+    "deviceId": {
+      "$id": "#/properties/deviceId",
+      "type": "string",
+      "description": "Unique device identifier. Unique for local system (in bus)"
+    },
+    "token": {
+      "$id": "#/properties/token",
+      "type": "string",
+      "description": "Base64 URL (without padding) encoded token. Only present if the device is able to read token directly (has access keys)"
+    },
+    "travelCardNumber": {
+      "$id": "#/properties/travelCardNumber",
+      "type": "string",
+      "pattern": "^\\d{9}$",
+      "description": "Serial number for travel card, 9 digits as string."
+    }
+  },
+  "required": ["traceId", "deviceId", "eventTimeStamp", "travelCardNumber"]
+}
