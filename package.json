@@ -18,7 +18,8 @@
     "generate-types": "node -r @swc-node/register tools/generate-types.ts",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "example": "sh tools/example.sh"
   },
   "devDependencies": {
     "@swc-node/register": "^1.6.2",
