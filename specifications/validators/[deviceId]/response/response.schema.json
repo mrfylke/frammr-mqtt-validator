@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/[deviceId]/response.schema.json",
+  "title": "Validation Response",
+  "type": "object",
+  "description": "Response sent to devices after inspection result has been found.",
+  "properties": {
+    "traceId": {
+      "$id": "#/properties/traceId",
+      "type": "string",
+      "format": "uuid",
+      "description": "An unique message identifier - UUID v4"
+    },
+    "eventTimestamp": {
+      "$id": "#/properties/eventTimestamp",
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp for when the validation happened. UTC in RFC3339 format."
+    },
+    "inspectionResult": {
+      "$id": "#/properties/inspectionResult",
+      "type": "object",
+      "description": "Information about actual inspection result.",
+      "required": ["validity"],
+      "properties": {
+        "validity": {
+          "$id": "#/properties/inspectionResult/validity",
+          "type": "string",
+          "pattern": "^(VALID|INVALID|ERROR)$",
+          "description": "Enum of validity. Either VALID, INVALID or ERROR"
+        },
+        "title": {
+          "$id": "#/properties/inspectionResult/title",
+          "type": "string",
+          "maxLength": 100,
+          "description": "Optional Title (Large text on top). Limited to 100 characters."
+        },
+        "message": {
+          "$id": "#/properties/inspectionResult/message",
+          "type": "string",
+          "maxLength": 150,
+          "description": "Optional message (smaller text under title). Limited to 150 characters."
+        }
+      }
+    }
+  },
+  "required": ["traceId", "eventTimestamp", "inspectionResult"]
+}
