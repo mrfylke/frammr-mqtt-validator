@@ -9,7 +9,7 @@ import { TopicName, topicSet } from "./types";
 const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
 
-type ValidationOutput =
+export type ValidationOutput =
   | {
       error: false;
     }
