@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/nfc/token.schema.json",
+  "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/nfc/nfc.schema.json",
   "title": "NFC Validation Request",
   "type": "object",
   "description": "Validating NFC card containing account tokens to be validated.",
@@ -15,7 +15,7 @@
       "$id": "#/properties/eventTimeStamp",
       "type": "string",
       "format": "date-time",
-      "description": "Time stamp for the time the barcode was read. UTC in RFC3339 format."
+      "description": "Timestamp for the time the travelcard was read. UTC in RFC3339 format."
     },
     "deviceId": {
       "$id": "#/properties/deviceId",
