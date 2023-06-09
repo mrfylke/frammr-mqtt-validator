@@ -34,5 +34,5 @@
       "description": "Serial number for travel card, 9 digits as string."
     }
   },
-  "required": ["traceId", "deviceId", "eventTimeStamp", "travelCardNumber"]
+  "required": ["traceId", "deviceId", "eventTimestamp", "travelCardNumber"]
 }
