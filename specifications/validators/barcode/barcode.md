@@ -12,7 +12,7 @@ Barcode should be transmitted as base64 encoded URL string without padding.
 
 - Topic: `validators/barcode`
 - Direction: Publish (Inbound to client)
-- JSON Schema: [barcode.schema.json](./barcode.schema.json.json)
+- JSON Schema: [barcode.schema.json](./barcode.schema.json)
 - MQTT QoS: 1 (at least once)
 - Trigger: Once every time a passenger presents a barcode to the barcode reader.
 
