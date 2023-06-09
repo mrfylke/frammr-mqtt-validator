@@ -28,5 +28,5 @@
       "description": "Base64 URL (without padding) encoded content from barcode."
     }
   },
-  "required": ["traceId", "deviceId", "eventTimeStamp", "barcode"]
+  "required": ["traceId", "deviceId", "eventTimestamp", "barcode"]
 }
