@@ -19,7 +19,8 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
-    "example": "sh tools/example.sh"
+    "example": "sh tools/example.sh",
+    "fail": "sh tools/fail.sh"
   },
   "devDependencies": {
     "@swc-node/register": "^1.6.2",
