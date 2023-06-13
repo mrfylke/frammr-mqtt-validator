@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/nfc/apdu/receive.json",
+  "title": "APDU result receive event",
+  "type": "object",
+  "description": "APDU results given on specific transmitId",
+  "properties": {
+    "traceId": {
+      "$id": "#/properties/traceId",
+      "type": "string",
+      "format": "uuid",
+      "description": "An unique message identifier - UUID v4"
+    },
+    "transmitId": {
+      "$id": "#/properties/transmitId",
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier (UUID v4) passed in from transmit. Groups results with initial command lists."
+    },
+    "eventTimestamp": {
+      "$id": "#/properties/eventTimeStamp",
+      "type": "string",
+      "format": "date-time",
+      "description": "Time stamp for the time the command list was generated. UTC in RFC3339 format."
+    },
+    "deviceId": {
+      "$id": "#/properties/deviceId",
+      "type": "string",
+      "description": "Unique device identifier. Unique for local system (in bus)"
+    },
+    "result": {
+      "$id": "#/properties/result",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Result to a command.",
+        "required": ["commandId", "frame"],
+        "properties": {
+          "commandId": {
+            "type": "integer",
+            "description": "Incremental number denoting what command it is in a specific sequence."
+          },
+          "frame": {
+            "type": "string",
+            "description": "Base64 encoded value based on command with specific corresponding commandId."
+          }
+        }
+      },
+      "description": "List of results to specific commands denoted by commandId and base64 encoded buffered result."
+    }
+  },
+  "required": ["traceId", "deviceId", "transmitId", "eventTimestamp", "result"]
+}

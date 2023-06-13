@@ -1,0 +1,11 @@
+{
+  "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+  "deviceId": "flv202400004",
+  "eventTimestamp": "2023-04-22T10:28:37.337Z",
+  "result": [
+    { "commandId": 1, "frame": "AA==" },
+    { "commandId": 2, "frame": "AJCAAAIpM6UjpXwAKAACgEA=" },
+    { "commandId": 3, "frame": "AA==" },
+    { "commandId": 4, "frame": "r///////////" }
+  ]
+}
