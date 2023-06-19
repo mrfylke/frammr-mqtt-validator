@@ -33,11 +33,12 @@ See related transmit topic: [`validators/nfc/apdu/receive`](../receive).
   "deviceId": "flv202400004",
   "eventTimestamp": "2023-04-22T10:28:37.337Z",
   "transmitId": "c28f206d-8016-4d22-b21b-70d8d6d2fea4",
+  "apduType": "desfire",
   "command": [
-    { "commandId": 1, "frame": "WgCAVw==" },
-    { "commandId": 2, "frame": "vQwAAAAQAAA=" },
-    { "commandId": 3, "frame": "WgGAVw==" },
-    { "commandId": 4, "frame": "Cgc=" }
+    { "commandId": 1, "frame": "WgCAVw==", "expStatus": "0x00" },
+    { "commandId": 2, "frame": "vQwAAAAQAAA=", "expStatus": "0x00" },
+    { "commandId": 3, "frame": "WgGAVw==", "expStatus": "0x00" },
+    { "commandId": 4, "frame": "Cgc=", "expStatus": "0x00" }
   ]
 }
 ```

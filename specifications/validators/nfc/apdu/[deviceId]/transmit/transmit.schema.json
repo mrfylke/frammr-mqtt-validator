@@ -28,13 +28,19 @@
       "type": "string",
       "description": "Unique device identifier. Unique for local system (in bus)"
     },
+    "apduType": {
+      "$id": "#/properties/apduType",
+      "type": "string",
+      "enum": ["desfire", "iso7816"],
+      "description": "Type of card for APDU commands. Either desfire or iso7816"
+    },
     "command": {
       "$id": "#/properties/command",
       "type": "array",
       "items": {
         "type": "object",
         "description": "APDU Command with specific commandId",
-        "required": ["commandId", "frame"],
+        "required": ["commandId", "frame", "expStatus"],
         "properties": {
           "commandId": {
             "type": "integer",
@@ -43,11 +49,22 @@
           "frame": {
             "type": "string",
             "description": "Base64 encoded APDU Command."
+          },
+          "expStatus": {
+            "type": "string",
+            "description": "Expected prefix status as first returned bytes."
           }
         }
       },
       "description": "List of results to specific commands denoted by commandId and base64 encoded buffered commands."
     }
   },
-  "required": ["traceId", "deviceId", "transmitId", "eventTimestamp", "command"]
+  "required": [
+    "traceId",
+    "deviceId",
+    "transmitId",
+    "eventTimestamp",
+    "command",
+    "apduType"
+  ]
 }
