@@ -11,8 +11,8 @@
       "format": "uuid",
       "description": "An unique message identifier - UUID v4"
     },
-    "transmitId": {
-      "$id": "#/properties/transmitId",
+    "transceiveId": {
+      "$id": "#/properties/transceiveId",
       "type": "string",
       "format": "uuid",
       "description": "Unique identifier (UUID v4) for set of commands passed back and forth. Groups results with command lists."
@@ -62,7 +62,7 @@
   "required": [
     "traceId",
     "deviceId",
-    "transmitId",
+    "transceiveId",
     "eventTimestamp",
     "command",
     "apduType"

@@ -3,7 +3,7 @@
   "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/nfc/apdu/receive.json",
   "title": "APDU result receive event",
   "type": "object",
-  "description": "APDU results given on specific transmitId",
+  "description": "APDU results given on specific transceiveId",
   "properties": {
     "traceId": {
       "$id": "#/properties/traceId",
@@ -11,8 +11,8 @@
       "format": "uuid",
       "description": "An unique message identifier - UUID v4"
     },
-    "transmitId": {
-      "$id": "#/properties/transmitId",
+    "transceiveId": {
+      "$id": "#/properties/transceiveId",
       "type": "string",
       "format": "uuid",
       "description": "Unique identifier (UUID v4) passed in from transmit. Groups results with initial command lists."
@@ -49,5 +49,11 @@
       "description": "List of results to specific commands denoted by commandId and base64 encoded buffered result."
     }
   },
-  "required": ["traceId", "deviceId", "transmitId", "eventTimestamp", "result"]
+  "required": [
+    "traceId",
+    "deviceId",
+    "transceiveId",
+    "eventTimestamp",
+    "result"
+  ]
 }

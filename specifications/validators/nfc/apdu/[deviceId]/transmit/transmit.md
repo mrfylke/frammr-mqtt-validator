@@ -12,7 +12,7 @@ topic `validators/apdu/receive` with corresponding `commandId`.
 APDU commands can be used to read or write specific values from travel cards or
 other NFC based devices.
 
-`transmitId` can be used to link `transmit` and `receive` events.
+`transceiveId` can be used to link `transmit` and `receive` events.
 `eventTimestamp` is the time the command transmit request is generated.
 
 - Topic: `validators/nfc/apdu/[deviceId]/transmit`
@@ -32,7 +32,7 @@ See related transmit topic: [`validators/nfc/apdu/receive`](../receive).
   "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
   "deviceId": "flv202400004",
   "eventTimestamp": "2023-04-22T10:28:37.337Z",
-  "transmitId": "c28f206d-8016-4d22-b21b-70d8d6d2fea4",
+  "transceiveId": "c28f206d-8016-4d22-b21b-70d8d6d2fea4",
   "apduType": "desfire",
   "command": [
     { "commandId": 1, "frame": "WgCAVw==", "expStatus": "0x00" },
