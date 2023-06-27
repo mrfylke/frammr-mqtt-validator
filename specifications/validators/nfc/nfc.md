@@ -39,7 +39,13 @@ Token should be transmitted as base64 encoded URL string without padding.
 ```mermaid
 flowchart TD
     A[Customer shows card] --> B(NFC device\nreads card)
-    B --> C{Device contains\naccess keys}
+
+    B --> B1{Is supported card?}
+    B1 -->|no| ResponseInvalid_0[Built in response:\n Not valid]
+
+
+
+    B1 -->|Yes| C{Device contains\naccess keys}
 
     C -->|Yes| AC1(Read card,\nfetch NSD serial number and\npotential token)
     AC1 --> AC2{Is token\non card?}
