@@ -30,8 +30,8 @@
     "travelCardNumber": {
       "$id": "#/properties/travelCardNumber",
       "type": "string",
-      "pattern": "^\\d{9}$",
-      "description": "Serial number for travel card, 9 digits as string."
+      "pattern": "^\\d{1,10}$",
+      "description": "Serial number for travel card, 1-10 digits as string."
     }
   },
   "required": ["traceId", "deviceId", "eventTimestamp", "travelCardNumber"]
