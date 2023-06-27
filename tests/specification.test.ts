@@ -15,7 +15,7 @@ for (let spec of availableTopics) {
     `[specification: ${spec}]: case $outcome -> $expected`,
     async ({ outcome, expected }) => {
       const valid = await helper_validate(spec, outcome);
-      if (valid.error) {
+      if (valid.error && outcome !== "fail") {
         console.log(spec, valid.errorData);
       }
       expect(valid.error).toBe(expected);
