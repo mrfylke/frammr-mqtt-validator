@@ -42,11 +42,11 @@
           },
           "frame": {
             "type": "string",
-            "description": "Base64 encoded value based on command with specific corresponding commandId."
+            "description": "Result value from command with specific corresponding commandId. May be empty string if not matching expected prefix, but will always be defined. Value in hex starting with 0x."
           }
         }
       },
-      "description": "List of results to specific commands denoted by commandId and base64 encoded buffered result."
+      "description": "List of results to specific commands denoted by commandId and hex buffered result."
     }
   },
   "required": [

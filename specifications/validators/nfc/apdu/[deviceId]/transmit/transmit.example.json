@@ -5,9 +5,9 @@
   "transceiveId": "c28f206d-8016-4d22-b21b-70d8d6d2fea4",
   "apduType": "desfire",
   "command": [
-    { "commandId": 1, "frame": "WgCAVw==", "expStatus": "0x00" },
-    { "commandId": 2, "frame": "vQwAAAAQAAA=", "expStatus": "0x00" },
-    { "commandId": 3, "frame": "WgGAVw==", "expStatus": "0x00" },
-    { "commandId": 4, "frame": "Cgc=", "expStatus": "0x00" }
+    { "commandId": 1, "frame": "0x0080", "expStatus": "0x00" },
+    { "commandId": 2, "frame": "0x000000100000", "expStatus": "0x00" },
+    { "commandId": 3, "frame": "0x0180", "expStatus": "0x00" },
+    { "commandId": 4, "frame": "0x07", "expStatus": "0x00" }
   ]
 }

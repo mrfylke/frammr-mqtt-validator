@@ -48,15 +48,15 @@
           },
           "frame": {
             "type": "string",
-            "description": "Base64 encoded APDU Command."
+            "description": "Command frame in hex starting with 0x."
           },
           "expStatus": {
             "type": "string",
-            "description": "Expected prefix status as first returned bytes."
+            "description": "Expected prefix status as first returned bytes in hex starting with 0x. If not matching expected status returning result will be empty."
           }
         }
       },
-      "description": "List of results to specific commands denoted by commandId and base64 encoded buffered commands."
+      "description": "List of results to specific commands denoted by commandId and hex buffered commands."
     }
   },
   "required": [

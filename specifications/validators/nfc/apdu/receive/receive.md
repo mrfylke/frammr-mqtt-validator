@@ -18,6 +18,12 @@ results corresponding to the results transmitted, with the same specified
 - MQTT QoS: 1 (at least once)
 - Trigger: Result from transmitted commands.
 
+## Hex and expected status
+
+All result frames should be represneted as hex, starting with 0x. See examples.
+If result of executing command does not match expected status prefix passed in
+the transmit event, result should be ommited.
+
 ## Related
 
 See related transmit topic:
@@ -32,10 +38,10 @@ See related transmit topic:
   "eventTimestamp": "2023-04-22T10:28:37.337Z",
   "transceiveId": "c28f206d-8016-4d22-b21b-70d8d6d2fea4",
   "result": [
-    { "commandId": 1, "frame": "AA==" },
-    { "commandId": 2, "frame": "AJCAAAIpM6UjpXwAKAACgEA=" },
-    { "commandId": 3, "frame": "AA==" },
-    { "commandId": 4, "frame": "r///////////" }
+    { "commandId": 1, "frame": "0x00" },
+    { "commandId": 2, "frame": "0x0090800002000280" },
+    { "commandId": 3, "frame": "0x00" },
+    { "commandId": 4, "frame": "" }
   ]
 }
 ```
