@@ -26,8 +26,8 @@
         "validity": {
           "$id": "#/properties/inspectionResult/validity",
           "type": "string",
-          "pattern": "^(VALID|INVALID|ERROR)$",
-          "description": "Enum of validity. Either VALID, INVALID or ERROR"
+          "pattern": "^(VALID|INVALID|ERROR|WARNING)$",
+          "description": "Enum of validity. Either VALID, INVALID, WARNING or ERROR"
         },
         "title": {
           "$id": "#/properties/inspectionResult/title",
