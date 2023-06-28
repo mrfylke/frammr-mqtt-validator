@@ -40,7 +40,7 @@
       "items": {
         "type": "object",
         "description": "Smart Card app contents",
-        "required": ["commandId", "frame", "expStatus"],
+        "required": ["appId", "files"],
         "properties": {
           "appId": {
             "type": "string",
