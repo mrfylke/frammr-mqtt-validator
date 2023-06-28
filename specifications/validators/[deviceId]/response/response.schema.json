@@ -35,11 +35,11 @@
           "maxLength": 100,
           "description": "Optional Title (Large text on top). Limited to 100 characters."
         },
-        "message": {
-          "$id": "#/properties/result/message",
+        "description": {
+          "$id": "#/properties/result/description",
           "type": "string",
           "maxLength": 150,
-          "description": "Optional message (smaller text under title). Limited to 150 characters."
+          "description": "Optional description (smaller text under title). Limited to 150 characters."
         }
       }
     }

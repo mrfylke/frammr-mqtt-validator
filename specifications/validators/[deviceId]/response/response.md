@@ -10,7 +10,8 @@ fail and error. In the current specification the response method is limited to a
 variant type/enum, and it's up to the device to handle the proper response in
 form of icon, color and sound.
 
-Device should optionally recieve title and message if supported by the device.
+Device should optionally recieve title and description if supported by the
+device.
 
 - Topic: `validators/[deviceId]/response`
 - Direction: Consume (Outbound from client)
@@ -26,7 +27,7 @@ Device should optionally recieve title and message if supported by the device.
   "eventTimestamp": "2023-09-01T23:45:52Z",
   "result": {
     "title": "Godkjent",
-    "message": "Validert 22/04/2020 13:19 Enkeltbillett 1 Voksen ",
+    "description": "Validert 22/04/2020 13:19 Enkeltbillett 1 Voksen ",
     "validity": "VALID"
   }
 }
