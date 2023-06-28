@@ -24,7 +24,7 @@ Device should optionally recieve title and message if supported by the device.
 {
   "traceId": "48b12d1f-6b96-4f70-94f9-f785cef96812",
   "eventTimestamp": "2023-09-01T23:45:52Z",
-  "inspectionResult": {
+  "result": {
     "title": "Godkjent",
     "message": "Validert 22/04/2020 13:19 Enkeltbillett 1 Voksen ",
     "validity": "VALID"
