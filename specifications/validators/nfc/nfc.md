@@ -22,6 +22,8 @@ Token should be transmitted as base64 encoded URL string without padding.
 - Trigger: Once every time a passenger presents a travel card to the barcode
   reader.
 
+## Card content dump
+
 ## Examples
 
 ```json
