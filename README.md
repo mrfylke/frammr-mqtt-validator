@@ -15,11 +15,15 @@ details on running the project as a JSON validator or a MQTT client below.
 
 ### Topic tree
 
-```
+<pre>
 /
 └── sensors
-    └── location
-```
+    └── <a href="./specifications/sensors/location/">location</a>
+└── validators
+    ├── [deviceId]
+    │   └── <a href="./specifications/validators/%5BdeviceId%5D/response">response</a>
+    └── <a href="./specifications/validators/barcode/">barcode</a>
+</pre>
 
 ## CLI tooling
 
