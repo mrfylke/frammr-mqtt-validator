@@ -40,11 +40,16 @@
       "items": {
         "type": "object",
         "description": "Smart Card app contents",
-        "required": ["appId", "files"],
+        "required": ["appId", "files", "type"],
         "properties": {
           "appId": {
             "type": "string",
             "description": "Unique ID representing the application on smart card"
+          },
+          "type": {
+            "type": "string",
+            "const": "desfire",
+            "description": "Type fo smart card. Only supported type for now is Desfire cards."
           },
           "files": {
             "type": "array",

@@ -33,6 +33,9 @@ This can also be used in cases where the smart card contains different type of
 travel rights and when there is a need to prioritize between them (e.g. NOD,
 account based, etc).
 
+Only supported type for now is `desfire` and that needs to be set as `type`, for
+future proofing when new types are added.
+
 ## Examples
 
 ```json
@@ -56,6 +59,7 @@ account based, etc).
   "cardContent": [
     {
       "appId": "<ID>",
+      "type": "desfire",
       "files": [{ "fileNumber": "<FileNumber>", "content": "0x0032" }]
     }
   ]
