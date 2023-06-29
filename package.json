@@ -4,7 +4,7 @@
   "description": "Test client for validating MQTT messages for MT Buss",
   "main": "lib/tools/validate.js",
   "types": "lib/tools/validate.d.ts",
-  "license": "EUPL-1.2",
+  "license": "Apache 2.0",
   "bin": "lib/tools/bin.js",
   "files": [
     "lib/tools/*",

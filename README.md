@@ -1,17 +1,22 @@
-# MT Buss MQTT Validator
+# Bus hardware message specification
 
-> OBS: This repo is a work in progress and will change in the comming weeks.
+This repo contains specifications for MQTT message exchange (topic + payload)
+intended for hardware topologies running in busses using MT Bus client for sales
+and validation.
 
-This repo contains a test validation client for MQTT communication for hardware
-devices intended for busses in Møre og Romsdal by FRAM. You can use the code and
-specification files here to test implementations on hardware or software. See
-details on running the project as a JSON validator or a MQTT client below.
+Scope of this specification is primarly for Møre og Romsdal Fylkeskommune and
+FRAM, but the overall ambition is for a broad consensus with other operators and
+authorities.
 
 ## Structure of this repo
 
-- All specification descriptions found in [/documents](./documents/)
-  - See also template: [/documents/\_template.md](./documents/_template.md)
-- All specification found in [/specifications](./specifications/)
+In this repo you'll find a test client, CLI validator, documentation page, and
+the specification it self.
+
+- All specification and documentation found in
+  [/specifications](./specifications/)
+- Test client found in [/src](./src/)
+- CLI source found in [/tools](./src/)
 
 ### Topic tree
 
@@ -24,6 +29,10 @@ details on running the project as a JSON validator or a MQTT client below.
     │   └── <a href="./specifications/validators/%5BdeviceId%5D/response">response</a>
     └── <a href="./specifications/validators/barcode/">barcode</a>
 </pre>
+
+## Adding new Specifications
+
+See documentation [specifications/README.md](./specifications/README.md).
 
 ## CLI tooling
 
@@ -172,10 +181,6 @@ For the final source of truth check out the [specifications](./specifications).
   "code": "<base64-encoded-code>"
 }
 ```
-
-## Adding new Specifications
-
-See documentation [specifications/README.md](./specifications/README.md).
 
 ## Prior work
 
