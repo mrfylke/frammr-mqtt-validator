@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
+import { availableTopics, listSpecifications } from "@frammr/mqtt-types";
 import { readFile } from "fs/promises";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { availableTopics } from "./types";
-import validate from "./validate";
-import listSpecifications from "./fs-to-topics";
+import { validate } from ".";
 
 main();
 
@@ -56,6 +55,7 @@ async function main() {
 }
 
 async function readLocalFile(filename: string): Promise<any> {
+  console.log(process.cwd());
   const spec = await readFile(filename, "utf8");
   try {
     return JSON.parse(spec.toString());

@@ -134,3 +134,8 @@ dist
 
 lib/
 temp.json
+
+packages/validator/specifications
+
+
+.turbo

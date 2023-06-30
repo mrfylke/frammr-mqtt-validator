@@ -1,43 +1,23 @@
 {
-  "name": "@frammr/mqtt-validator",
+  "name": "monorepo-typescript",
   "version": "1.0.0",
-  "description": "Test client for validating MQTT messages for MT Buss",
-  "main": "lib/tools/validate.js",
-  "types": "lib/tools/validate.d.ts",
-  "license": "Apache 2.0",
-  "bin": "lib/tools/bin.js",
-  "files": [
-    "lib/tools/*",
-    "!lib/tools/generate-types.js",
-    "!lib/tools/generate-types.d.ts",
-    "specifications/*"
+  "description": "A monorepo in TypeScript",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
   "scripts": {
-    "start": "node -r @swc-node/register src/server.ts",
-    "cli": "node -r @swc-node/register tools/bin.ts",
-    "generate-types": "node -r @swc-node/register tools/generate-types.ts",
-    "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest",
+    "build": "turbo build",
+    "typecheck": "yarn workspaces run typecheck",
+    "test": "yarn workspace @frammr/mqtt-validator run test",
+    "cli": "node packages/validator/dist/bin.js",
     "example": "sh tools/example.sh",
-    "fail": "sh tools/fail.sh"
+    "fail": "sh tools/fail.sh",
+    "publish-packages": "turbo run build && changeset version && changeset publish"
   },
   "devDependencies": {
-    "@swc-node/register": "^1.6.2",
-    "@swc/core": "^1.3.35",
+    "@changesets/cli": "^2.26.2",
     "@tsconfig/node-lts-strictest": "^18.12.1",
-    "@types/node": "^18.13.0",
-    "@types/yargs": "^17.0.22",
-    "ajv-formats": "^2.1.1",
-    "typescript": "^4.9.5",
-    "vitest": "^0.28.5"
-  },
-  "dependencies": {
-    "ajv": "^8.12.0",
-    "dotenv": "^16.0.3",
-    "fdir": "^6.0.1",
-    "mqtt": "^4.3.7",
-    "picomatch": "^2.3.1",
-    "yargs": "^17.7.0"
+    "turbo": "^1.10.6"
   }
 }

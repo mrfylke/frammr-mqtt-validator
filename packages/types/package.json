@@ -1,0 +1,22 @@
+{
+  "name": "@frammr/mqtt-types",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MQTT internal shared types",
+  "license": "Apache-2.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "generate-types": "node -r @swc-node/register src/tools/generate-types.ts",
+    "build": "tsc --build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.2",
+    "typescript": "^5.1.6",
+    "@swc-node/register": "^1.6.6"
+  },
+  "dependencies": {
+    "fdir": "^6.0.1"
+  }
+}

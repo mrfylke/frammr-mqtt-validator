@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
-import { TopicName, availableTopics, topicSet } from "../tools/types";
-import validate, { type ValidationOutput } from "../tools/validate";
+import { validate, type ValidationOutput } from "..";
+import { type TopicName, availableTopics, topicSet } from "@frammr/mqtt-types";
+import { join } from "path";
 
 if (!availableTopics.length) {
   test("No tests", () => expect(true).toBe(true));
@@ -26,7 +27,8 @@ async function helper_validate(
   spec: TopicName,
   failOrExample: "fail" | "example"
 ): Promise<ValidationOutput> {
-  const fixture = `../specifications/${topicSet[spec]}`.replace(
+  const base = join(__dirname, "../../..", "specifications");
+  const fixture = join(base, `${topicSet[spec]}`).replace(
     "schema.json",
     `${failOrExample}.json`
   );

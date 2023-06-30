@@ -1,1 +1,1 @@
-yarn cli -t $1 -f ./specifications/$1/`basename $1`.example.json
+node packages/validator/dist/bin.js -t $1 -f ./specifications/$1/`basename $1`.example.json

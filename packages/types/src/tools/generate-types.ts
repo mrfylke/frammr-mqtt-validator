@@ -21,5 +21,5 @@ export const topicSet = ${JSON.stringify(
   )} satisfies Record<TopicName, string>;
 `;
 
-  await writeFile(join(__dirname, "types.ts"), types);
+  await writeFile(join(__dirname, "..", "types.ts"), types);
 }

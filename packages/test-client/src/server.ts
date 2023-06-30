@@ -1,9 +1,9 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
+import { availableTopics } from "@frammr/mqtt-types";
+import { validate } from "@frammr/mqtt-validator";
 import mqtt, { MqttClient } from "mqtt";
-import { availableTopics } from "../tools/types";
-import validate from "../tools/validate";
 import config from "./config";
 
 // TODO SHOW ERROR

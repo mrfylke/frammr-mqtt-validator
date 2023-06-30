@@ -13,10 +13,10 @@ authorities.
 In this repo you'll find a test client, CLI validator, documentation page, and
 the specification it self.
 
-- All specification and documentation found in
-  [/specifications](./specifications/)
-- Test client found in [/src](./src/)
-- CLI source found in [/tools](./src/)
+- All specification and docs found in [/specifications](./specifications/)
+- Tools, test clients, cli found in [/packages](./packages/)
+- Running web page with specificatiosn is located in
+  [/packages/web](./packages/web)
 
 ### Topic tree
 
