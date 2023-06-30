@@ -4,5 +4,5 @@
     "outDir": "./dist",
     "composite": true
   },
-  "include": ["bin.ts", "index.ts"]
+  "include": ["src/", "src/tests"]
 }

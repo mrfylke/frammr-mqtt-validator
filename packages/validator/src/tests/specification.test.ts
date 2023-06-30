@@ -27,7 +27,7 @@ async function helper_validate(
   spec: TopicName,
   failOrExample: "fail" | "example"
 ): Promise<ValidationOutput> {
-  const base = join(__dirname, "../../..", "specifications");
+  const base = join(__dirname, "../../../..", "specifications");
   const fixture = join(base, `${topicSet[spec]}`).replace(
     "schema.json",
     `${failOrExample}.json`

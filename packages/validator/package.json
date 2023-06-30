@@ -3,18 +3,17 @@
   "version": "1.0.0",
   "private": false,
   "description": "Hardware bus validator CLI tool.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "license": "Apache-2.0",
-  "bin": "dist/bin.js",
+  "bin": "dist/src/bin.js",
   "files": [
-    "dist/*",
-    "specifications/*"
+    "dist/*"
   ],
   "scripts": {
-    "build": "esbuild bin.ts index.ts --allow-overwrite --bundle --platform=node --outdir=dist && yarn copy",
-    "clean": "rimraf ./specifications",
-    "copy": "cp -r ../../specifications ./specifications",
+    "build": "esbuild src/bin.ts src/index.ts --allow-overwrite --bundle --platform=node --outdir=dist && yarn copy",
+    "clean": "rimraf ./dist",
+    "copy": "cp -r ../../specifications ./dist/specifications",
     "typecheck": "tsc --noEmit",
     "test": "vitest"
   },
