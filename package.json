@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "turbo build",
+    "generate-types": "yarn workspace @frammr/mqtt-types run generate-types",
     "typecheck": "yarn workspaces run typecheck",
     "test": "yarn workspace @frammr/mqtt-validator run test",
     "cli": "node packages/validator/dist/bin.js",

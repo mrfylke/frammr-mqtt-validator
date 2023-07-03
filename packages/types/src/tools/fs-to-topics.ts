@@ -5,7 +5,7 @@ export default async function listSpecifications(): Promise<
   Record<string, string>
 > {
   const crawler = new fdir().withRelativePaths().glob("./**/*.schema.json");
-  const folder = join(__dirname, "../../..", "specifications");
+  const folder = join(__dirname, "../../../..", "specifications");
   const data = await crawler.crawl(folder).withPromise();
 
   const obj: Record<string, string> = {};
