@@ -37,6 +37,7 @@ See related transmit topic:
   "deviceId": "flv202400004",
   "eventTimestamp": "2023-04-22T10:28:37.337Z",
   "transceiveId": "c28f206d-8016-4d22-b21b-70d8d6d2fea4",
+  "apduType": "desfire",
   "result": [
     { "commandId": 1, "frame": "0x00" },
     { "commandId": 2, "frame": "0x0090800002000280" },
