@@ -38,10 +38,13 @@ export async function validate(
 }
 
 async function readSpecification(topic: TopicName): Promise<ValidateFunction> {
-  const spec = await readFile(
-    join(__dirname, "..", "specifications", topicSet[topic])
-  );
   try {
+    // @TODO properly fix everythin from import and monorepo stuff.
+    const level = process.env["NODE_ENV"] == "test" ? "../../.." : "..";
+    const spec = await readFile(
+      join(__dirname, level, "specifications", topicSet[topic])
+    );
+
     const parsed = JSON.parse(spec.toString());
     const previous = ajv.getSchema(parsed["$id"]);
     if (previous) {
@@ -50,6 +53,6 @@ async function readSpecification(topic: TopicName): Promise<ValidateFunction> {
       return ajv.compile(parsed);
     }
   } catch (err) {
-    throw new Error(`Unable to load or parse ${err}`);
+    throw new Error(`Unable to load or parse ${err} ${process.env.NODE_ENV}`);
   }
 }
