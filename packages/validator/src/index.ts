@@ -53,6 +53,6 @@ async function readSpecification(topic: TopicName): Promise<ValidateFunction> {
       return ajv.compile(parsed);
     }
   } catch (err) {
-    throw new Error(`Unable to load or parse ${err} ${process.env.NODE_ENV}`);
+    throw new Error(`Unable to load or parse ${err}`);
   }
 }
