@@ -27,6 +27,19 @@ All commands should be represented as hex, starting with 0x. See examples.
 Expected status is optional. If result of executing command does not match
 expected status prefix, result is ommited in the receive event.
 
+### `0xAF` and continuation
+
+Continuation on `0xAF` is handled implicitly if `expStatus` is set as `0x00`,
+depending on apdu type. See description below.
+
+#### desfire (native)
+
+- If `expStatus=0x00` or empty and first bytes in response indicates more data
+  (`0xAF`) the device should fetch all data until end and give result as
+  concatinated byte array.
+- If `expStatus=0xAF` is transmitted it is not handled automatically by the
+  device.
+
 ## Related
 
 See related transmit topic: [`validators/nfc/apdu/receive`](../receive).

@@ -24,6 +24,19 @@ All result frames should be represneted as hex, starting with 0x. See examples.
 If result of executing command does not match expected status prefix passed in
 the transmit event, result should be ommited.
 
+### `0xAF` and continuation
+
+Continuation on `0xAF` is handled implicitly if `expStatus` as passed in by
+transmit is set as `0x00`. See description below.
+
+#### desfire (native)
+
+- If `expStatus=0x00` or empty and first bytes in response indicates more data
+  (`0xAF`) the device should fetch all data until end and give result as
+  concatinated byte array.
+- If `expStatus=0xAF` is transmitted it is not handled automatically by the
+  device.
+
 ## Related
 
 See related transmit topic:
