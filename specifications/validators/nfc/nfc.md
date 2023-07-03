@@ -24,10 +24,11 @@ Token should be transmitted as base64 encoded URL string without padding.
 
 ## Card content dump
 
-In some cases after running a APDU process (see flow chart) the entire card
-content can be passed from devices. This will simplify the flow from the client
+If device is configured as such the entire card content can be passed from
+devices (see flow chart). This will simplify the flow from the client
 perspective as it allows you to access content directly. See examples below for
-when `cardContent` is set.
+when `cardContent` is set. See topic `validators/configure` for configuration
+flag.
 
 This can also be used in cases where the smart card contains different type of
 travel rights and when there is a need to prioritize between them (e.g. NOD,
@@ -76,12 +77,17 @@ flowchart TD
     B1 -->|no| ResponseInvalid_0[Built in response:\n Not valid]
 
 
-
     B1 -->|Yes| C{Device contains\naccess keys}
 
-    C -->|Yes| AC1(Read card,\nfetch NSD serial number and\npotential token)
+    C -->|Yes| AC1_Dump{Is dump card content\nconfig active?}
+    AC1_Dump -->|Yes| AC1_Dump_1(Read entire\ncard content)
+
+    AC1_Dump_1 -->|/validators/nfc|AC4
+
+    AC1_Dump -->|No| AC1(Read card,\nfetch NSD serial number and\npotential token)
     AC1 --> AC2{Is token\non card?}
     AC2 -->|Yes| AC3(Read token)
+
     AC3 -->|/validators/nfc| AC4{Does token\nexists at Entur?}
     AC4 -->|Yes| AC5(Validate Token)
     AC5 -->|"/validators/[deviceId]/response"| AC6[Show response\nto customer]
@@ -100,8 +106,6 @@ flowchart TD
 
     NACToken1 -->|Blocked/removed| NACToken1No(APDU Subprocess\nRemove token from card)
     NACToken1No  -->|"/validators/[deviceId]/response"| NACToken1NoResponse[Show response\nto customer]
-
-
 
     NoToken --> FetchTokenStatus{Does token\nexists at Entur?}
     FetchTokenStatus-->|Blocked/removed| FetchTokenInvalid(No valid travel right)
