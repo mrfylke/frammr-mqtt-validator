@@ -11,7 +11,7 @@
     "dist/*"
   ],
   "scripts": {
-    "build": "esbuild src/bin.ts src/index.ts --allow-overwrite --bundle --platform=node --outdir=dist && yarn copy",
+    "build": "esbuild src/bin.ts src/index.ts --allow-overwrite --bundle --platform=node --outdir=dist/src && tsc -p tsconfig.json --emitDeclarationOnly && yarn copy",
     "clean": "rimraf ./dist",
     "copy": "cp -r ../../specifications ./dist/specifications",
     "typecheck": "tsc --noEmit",

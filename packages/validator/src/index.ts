@@ -39,7 +39,7 @@ export async function validate(
 
 async function readSpecification(topic: TopicName): Promise<ValidateFunction> {
   const spec = await readFile(
-    join(__dirname, "../../..", "specifications", topicSet[topic])
+    join(__dirname, "..", "specifications", topicSet[topic])
   );
   try {
     const parsed = JSON.parse(spec.toString());
