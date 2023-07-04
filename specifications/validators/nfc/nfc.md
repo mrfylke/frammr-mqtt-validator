@@ -1,17 +1,16 @@
 ---
 version: 1.0.0
-lastUpdated: 2023-06-08
+lastUpdated: 2023-07-04
 ---
 
 # Specification: nfc
 
-Passenger want to use the service and presents their travelcard that might
-contain a token referencing an account containing possible travel rights. If
-there is no token, serial number will be used and a potential token on a
-customer account with that serial number attached will be written back to the
-travel card.
-
-See diagram for total flow.
+When a passenger intends to use the service, they present their travel card,
+which may have a token referencing an account with corresponding travel rights.
+In cases where there is no token present, the serial number of the travel card
+will be used. If there is a customer account associated with that serial number,
+a potential token will be generated and written back to the travel card. See
+diagram for total flow.
 
 Token should be transmitted as base64 encoded URL string without padding.
 
@@ -24,15 +23,17 @@ Token should be transmitted as base64 encoded URL string without padding.
 
 ## Card content dump
 
-If device is configured as such the entire card content can be passed from
-devices (see flow chart). This will simplify the flow from the client
-perspective as it allows you to access content directly. See examples below for
-when `cardContent` is set. See topic `validators/configure` for configuration
-flag.
+If the device is configured accordingly, the complete content of the card can be
+transferred from the device, as depicted in the flow chart. This simplifies the
+client's perspective as it enables direct access to the card's content. Please
+refer to the `validators/configure` topic for the configuration flag that
+determines whether `cardContent` is set. Below are examples demonstrating the
+scenarios when `cardContent` is enabled.
 
-This can also be used in cases where the smart card contains different type of
-travel rights and when there is a need to prioritize between them (e.g. NOD,
-account based, etc).
+This concept is applicable in situations where the smart card holds various
+types of travel rights and there is a requirement to prioritize among them.
+Examples of such types include NOD (Name Origin Destination), account-based, and
+others.
 
 Only supported type for now is `nsd` and that needs to be set as `type`, for
 future proofing when new types are added.
@@ -88,7 +89,7 @@ flowchart TD
     AC1 --> AC2{Is token\non card?}
     AC2 -->|Yes| AC3(Read token)
 
-    AC3 -->|/validators/nfc| AC4{Does token\nexists at Entur?}
+    AC3 -->|/validators/nfc| AC4{Does token\nexists at Provider?}
     AC4 -->|Yes| AC5(Validate Token)
     AC5 -->|"/validators/[deviceId]/response"| AC6[Show response\nto customer]
     AC4 -->|Blocked/removed| AC7(APDU Subprocess\nRemove token from card)
@@ -99,15 +100,17 @@ flowchart TD
     NAC1 -->|/validators/nfc| NAC2(APDU Subprocess\nFetch token)
     NAC2 --> NAC3{Is token\non card?}
 
-    AC2 -->|No| NoToken(Get token from\nserial number)
+
+    AC2 -->|No| AC2_Get(Send only serial number)
+    AC2_Get -->|/validators/nfc| NoToken(Get token from\nserial number)
 
     NAC3 -->|No| NoToken
-    NAC3 -->|Yes| NACToken1{Does token\nexists at Entur?}
+    NAC3 -->|Yes| NACToken1{Does token\nexists at Provider?}
 
     NACToken1 -->|Blocked/removed| NACToken1No(APDU Subprocess\nRemove token from card)
     NACToken1No  -->|"/validators/[deviceId]/response"| NACToken1NoResponse[Show response\nto customer]
 
-    NoToken --> FetchTokenStatus{Does token\nexists at Entur?}
+    NoToken --> FetchTokenStatus{Does token\nexists at Provider?}
     FetchTokenStatus-->|Blocked/removed| FetchTokenInvalid(No valid travel right)
     FetchTokenStatus-->|Not found| FetchTokenInvalid
     FetchTokenInvalid -->|"/validators/[deviceId]/response"| ResponseInvalid[Show response:\n Not valid]
@@ -120,3 +123,9 @@ flowchart TD
     NACToken1 -->|Found| FetchTokenFoundValidate
 
 ```
+
+- The APDU sub-processes are custom command transceive processes that utilize
+  the [`apdu`](./apdu/) topics for communication and data exchange.
+- In the flow chart, the "Provider" refers to the Account Based Ticketing (ABT)
+  provider. This provider handles tasks such as customer data management and
+  ticket purchases within the ABT system.
