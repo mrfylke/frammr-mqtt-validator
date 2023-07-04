@@ -28,7 +28,7 @@ the specification it self.
     ├── [deviceId]
     │   └── <a href="./specifications/validators/%5BdeviceId%5D/response">response</a>
     ├── <a href="./specifications/validators/barcode/">barcode</a>
-    └── nfc
+    └── <a href="./specifications/validators/nfc/">nfc</a>
         └── apdu
             ├── [deviceId]
             │   └── <a href="./specifications/validators/nfc/apdu/[deviceId]/transmit/">transmit</a>
