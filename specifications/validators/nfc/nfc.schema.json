@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/mrfylke/mtbuss-mqtt-validator/specifications/validators/nfc/nfc.schema.json",
+  "title": "NFC Validation Request",
+  "type": "object",
+  "description": "Validating NFC card containing account tokens to be validated.",
+  "properties": {
+    "traceId": {
+      "$id": "#/properties/traceId",
+      "type": "string",
+      "format": "uuid",
+      "description": "An unique message identifier - UUID v4"
+    },
+    "eventTimestamp": {
+      "$id": "#/properties/eventTimeStamp",
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp for the time the travelcard was read. UTC in RFC3339 format."
+    },
+    "deviceId": {
+      "$id": "#/properties/deviceId",
+      "type": "string",
+      "description": "Unique device identifier. Unique for local system (in bus)"
+    },
+    "token": {
+      "$id": "#/properties/token",
+      "type": "string",
+      "description": "Base64 URL (without padding) encoded token. Only present if the device is able to read token directly (has access keys)"
+    },
+    "travelCardNumber": {
+      "$id": "#/properties/travelCardNumber",
+      "type": "string",
+      "pattern": "^\\d{1,10}$",
+      "description": "Serial number for travel card, 1-10 digits as string."
+    },
+    "cardContent": {
+      "$id": "#/properties/cardContent",
+      "type": "array",
+      "description": "Set of applications with file contents for smart card content dump when available. This can be available in some cases after a APDU command subprocess.",
+      "items": {
+        "type": "object",
+        "description": "Smart Card app contents",
+        "required": ["appId", "files", "type"],
+        "properties": {
+          "appId": {
+            "type": "string",
+            "description": "Unique ID representing the application on smart card"
+          },
+          "type": {
+            "type": "string",
+            "const": "nsd",
+            "description": "Type fo smart card. Only supported type for now is Desfire cards."
+          },
+          "files": {
+            "type": "array",
+            "description": "All dumped files with content for application on smart card",
+            "items": {
+              "type": "object",
+              "description": "Smart Card File",
+              "required": ["content", "fileNumber"],
+              "properties": {
+                "fileNumber": {
+                  "type": "string",
+                  "description": "File number for specific file in an application"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "File content in hex starting with 0x."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["traceId", "deviceId", "eventTimestamp", "travelCardNumber"]
+}
