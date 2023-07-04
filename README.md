@@ -22,12 +22,17 @@ the specification it self.
 
 <pre>
 /
-└── sensors
-    └── <a href="./specifications/sensors/location/">location</a>
+├── sensors
+│   └── <a href="./specifications/sensors/location/">location</a>
 └── validators
     ├── [deviceId]
     │   └── <a href="./specifications/validators/%5BdeviceId%5D/response">response</a>
-    └── <a href="./specifications/validators/barcode/">barcode</a>
+    ├── <a href="./specifications/validators/barcode/">barcode</a>
+    └── nfc
+        └── apdu
+            ├── [deviceId]
+            │   └── <a href="./specifications/validators/nfc/apdu/[deviceId]/transmit/">transmit</a>
+            └── <a href="./specifications/validators/nfc/apdu/receive/">receive</a>
 </pre>
 
 ## Adding new Specifications
