@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/mrfylke/frammr-mqtt-validator/specifications/device/diagnostics/request/request.schema.json",
+  "title": "RequestDiagnostics",
+  "type": "object",
+  "description": "Request diagnostics check from all devices",
+  "required": ["traceId", "eventTimestamp"],
+
+  "properties": {
+    "traceId": {
+      "$id": "#/properties/traceId",
+      "type": "string",
+      "format": "uuid",
+      "description": "An unique message identifier - UUID v4"
+    },
+    "eventTimestamp": {
+      "$id": "#/properties/eventTimeStamp",
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp for the time the travelcard was read. UTC in RFC3339 format."
+    }
+  }
+}
