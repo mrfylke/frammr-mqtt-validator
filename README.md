@@ -22,6 +22,12 @@ the specification it self.
 
 <pre>
 /
+├── device
+│   ├── [deviceId]
+│   │   └── <a href="./specifications/device/[deviceId]/diagnostics/">diagnostics</a>
+│   │       └── <a href="./specifications/device/[deviceId]/diagnostics/request/">request</a>
+│   └── <a href="./specifications/device/diagnostics/">diagnostics</a>
+│       └── <a href="./specifications/device/diagnostics/request/">request</a>
 ├── sensors
 │   └── <a href="./specifications/sensors/location/">location</a>
 └── validators
