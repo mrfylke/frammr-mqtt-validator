@@ -22,6 +22,12 @@ the specification it self.
 
 <pre>
 /
+├── device
+│   ├── [deviceId]
+│   │   └── <a href="./specifications/device/[deviceId]/diagnostics/">diagnostics</a>
+│   │       └── <a href="./specifications/device/[deviceId]/diagnostics/request/">request</a>
+│   └── <a href="./specifications/device/diagnostics/">diagnostics</a>
+│       └── <a href="./specifications/device/diagnostics/request/">request</a>
 ├── sensors
 │   └── <a href="./specifications/sensors/location/">location</a>
 └── validators
@@ -80,13 +86,16 @@ git clone https://github.com/mrfylke/frammr-mqtt-validator.git
 yarn install
 
 # 3. Copy .env.example and configure
-cp .env.example .env
+cp ./packages/test-client/.env.example ./packages/test-client/.env
+# Edit .env file
 
 # 4. Start MQTT client
-yarn start
+yarn run-testclient
 ```
 
-This will add a subscriber to the Broker as specified in `.env`.
+This will add a subscriber to the Broker as specified in `.env`. You might need
+a local test broker also. An alternative might be
+[Mosquitto](https://mosquitto.org/).
 
 ## Hardware and Communications
 
@@ -101,9 +110,9 @@ title: Component connections w/protocols
 graph TB
 
     subgraph terminal
-    A(MT Buss)
+    A(Sales Client)
     end
-    A(MT Buss) <--MQTT--> B(Gateway)
+    A(Sales Client) <--MQTT--> B(Gateway)
 
     subgraph READERS
         D(Barcode/NFC)
@@ -136,24 +145,24 @@ further down in this document.
 title: Example communication flow
 ---
 sequenceDiagram
-    participant MT Buss
+    participant Sales Client
     participant Gateway
 
     Gateway->>Barcode: connect()
     Barcode-->>Gateway: ack
 
-    MT Buss->>Gateway: connect()
-    Gateway-->>MT Buss: ack
+    Sales Client->>Gateway: connect()
+    Gateway-->>Sales Client: ack
 
-    MT Buss->>Gateway: subscribe(/barcode/validation/request)
+    Sales Client->>Gateway: subscribe(/barcode/validation/request)
     activate Gateway
 
     Barcode->>Gateway: publish(/barcode/validation/request)
-    Gateway-->>MT Buss: :validation-request
+    Gateway-->>Sales Client: :validation-request
     deactivate Gateway
 
     activate Gateway
-    MT Buss->>Gateway: publish(/barcode/validation/confirm)
+    Sales Client->>Gateway: publish(/barcode/validation/confirm)
     Gateway-->>Barcode: :validation-confirm
 
     deactivate Gateway

@@ -1,13 +1,14 @@
 {
-  "name": "monorepo-typescript",
+  "name": "@frammr/mqtt-monorepo",
   "version": "1.0.0",
-  "description": "A monorepo in TypeScript",
+  "description": "Monorepo for tooling and specifications for Hardware on bus standard MQTT message system",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo build",
+    "run-testclient": "yarn workspace @frammr/mqtt-testclient run start",
+    "build": "yarn generate-types && turbo build",
     "generate-types": "yarn workspace @frammr/mqtt-types run generate-types",
     "typecheck": "yarn workspaces run typecheck",
     "test": "yarn workspace @frammr/mqtt-validator run test",

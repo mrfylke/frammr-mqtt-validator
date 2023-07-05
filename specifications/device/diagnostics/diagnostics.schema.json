@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/mrfylke/frammr-mqtt-validator/specifications/diagnostics/diagnostics.schema.json",
+  "title": "Diagnostics",
+  "type": "object",
+  "description": "Diagnostics information on device",
+  "required": [
+    "traceId",
+    "eventTimestamp",
+    "deviceId",
+
+    "manufacturer",
+    "model",
+    "serial",
+    "firmwareVersion",
+    "standardVersion",
+    "ipAddress",
+    "label",
+    "functionality",
+    "status",
+    "statusText"
+  ],
+
+  "properties": {
+    "traceId": {
+      "$id": "#/properties/traceId",
+      "type": "string",
+      "format": "uuid",
+      "description": "An unique message identifier - UUID v4"
+    },
+    "eventTimestamp": {
+      "$id": "#/properties/eventTimeStamp",
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp for the time the travelcard was read. UTC in RFC3339 format."
+    },
+    "deviceId": {
+      "$id": "#/properties/deviceId",
+      "type": "string",
+      "description": "Unique device identifier. Unique for local system (in bus)"
+    },
+
+    "manufacturer": {
+      "$id": "#/properties/manufacturer",
+      "type": "string",
+      "description": ""
+    },
+    "model": {
+      "$id": "#/properties/model",
+      "type": "string",
+      "description": ""
+    },
+    "serial": {
+      "$id": "#/properties/serial",
+      "type": "string",
+      "description": ""
+    },
+    "firmwareVersion": {
+      "$id": "#/properties/firmwareVersion",
+      "type": "string",
+      "description": ""
+    },
+    "standardVersion": {
+      "$id": "#/properties/standardVersion",
+      "type": "string",
+      "description": ""
+    },
+    "ipAddress": {
+      "$id": "#/properties/ipAddress",
+      "type": "string",
+      "description": ""
+    },
+    "label": {
+      "$id": "#/properties/label",
+      "type": "string",
+      "description": ""
+    },
+    "functionality": {
+      "$id": "#/properties/functionality",
+      "type": "array",
+      "description": "",
+      "minItems": 1,
+      "items": [
+        {
+          "type": "string",
+          "enum": ["location", "barcode", "nfc"],
+          "description": ""
+        }
+      ]
+    },
+    "status": {
+      "$id": "#/properties/status",
+      "type": "string",
+      "enum": ["OK", "ERROR", "WARNING"],
+      "description": ""
+    },
+    "statusText": {
+      "$id": "#/properties/statusText",
+      "type": "string",
+      "description": ""
+    }
+  }
+}

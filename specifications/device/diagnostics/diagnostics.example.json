@@ -1,0 +1,16 @@
+{
+  "$schema": "./diagnostics.schema.json",
+  "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+  "deviceId": "flv202400004",
+  "eventTimestamp": "2023-04-22T10:28:37.337Z",
+  "manufacturer": "Acme",
+  "model": "NFC2000b",
+  "serial": "F0A222100004",
+  "firmwareVersion": "0.9.6.0",
+  "standardVersion": "1.0.0",
+  "ipAddress": "192.168.99.11",
+  "label": "front",
+  "functionality": ["nfc", "barcode"],
+  "status": "OK",
+  "statusText": "no errors"
+}
