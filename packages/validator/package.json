@@ -11,9 +11,11 @@
     "dist/*"
   ],
   "scripts": {
-    "build": "esbuild src/bin.ts src/index.ts --allow-overwrite --bundle --platform=node --outdir=dist/src && tsc -p tsconfig.json --emitDeclarationOnly && yarn copy",
-    "clean": "rimraf ./dist",
-    "copy": "cp -r ../../specifications ./dist/specifications",
+    "build": "run-s clean build-dist copy build-types",
+    "build-dist": "esbuild src/bin.ts src/index.ts --allow-overwrite --bundle --platform=node --outdir=dist/src",
+    "build-types": "tsc -p tsconfig.json --emitDeclarationOnly",
+    "clean": "rimraf -v ./dist/",
+    "copy": "cp -r ../../specifications ./dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest"
   },
@@ -22,6 +24,7 @@
     "@types/yargs": "^17.0.22",
     "ajv-formats": "^2.1.1",
     "esbuild": "^0.18.10",
+    "npm-run-all": "^4.1.5",
     "rimraf": "^5.0.1",
     "typescript": "^5.1.6",
     "vitest": "^0.28.5"

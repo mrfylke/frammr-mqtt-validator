@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "run-testclient": "yarn workspace @frammr/mqtt-testclient run start",
-    "build": "turbo build",
+    "build": "yarn generate-types && turbo build",
     "generate-types": "yarn workspace @frammr/mqtt-types run generate-types",
     "typecheck": "yarn workspaces run typecheck",
     "test": "yarn workspace @frammr/mqtt-validator run test",
