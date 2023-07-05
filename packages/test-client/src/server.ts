@@ -29,7 +29,7 @@ if (hasAdditionalConfig) {
 client.on("connect", () => {
   console.log("Connected to MQTT Broker");
   console.log(
-    `  Subscribing to topics: ${Object.keys(SUPPORTED_TOPICS).join(", ")}`
+    `  Subscribing to topics: ${Object.values(SUPPORTED_TOPICS).join(", ")}`
   );
   // Add subscription to all topics...
   for (let topic of SUPPORTED_TOPICS) {
