@@ -2,7 +2,7 @@
   "name": "@frammr/mqtt-testclient",
   "version": "1.0.0",
   "private": true,
-  "description": "Test client for validating MQTT messages for MT Buss",
+  "description": "Test client for validating MQTT messages for Sales Client in Bus",
   "license": "Apache-2.0",
   "main": "dist/src/server.js",
   "types": "dist/src/server.d.ts",
