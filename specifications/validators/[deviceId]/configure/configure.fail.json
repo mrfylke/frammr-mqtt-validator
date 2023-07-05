@@ -1,0 +1,9 @@
+{
+  "$schema": "./configure.schema.json",
+  "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+
+  "timeout": {
+    "timeInSeconds": -10,
+    "message": "Ingen kontakt med tjeneste. Gå på bussen"
+  }
+}

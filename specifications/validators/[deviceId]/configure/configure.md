@@ -1,6 +1,6 @@
 ---
 version: 1.0.0
-lastUpdated: 2023-06-19
+lastUpdated: 2023-07-05
 ---
 
 # Specification: Configure specific device
@@ -13,6 +13,12 @@ many options at once. Will only overwrite the passed configuration.
 - JSON Schema: [configure.schema.json](./configure.schema.json)
 - MQTT QoS: 1 (at least once)
 - Trigger: Client setting configuration through UI or automated requests.
+
+## Settings
+
+- `dumpCardMode`: See NFC flow chart for implications of card dump mode.
+- `timeout`: Settings for timeout behavior with timout in seconds and message
+  when it is timed out. Timeout of 0 will be no timeout (not recommended)
 
 ## Related
 

@@ -1,6 +1,6 @@
 ---
 version: 1.0.0
-lastUpdated: 2023-06-19
+lastUpdated: 2023-07-05
 ---
 
 # Specification: Request Current Configuration
