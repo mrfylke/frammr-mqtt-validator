@@ -22,15 +22,26 @@ configuration for a specific validator.
 ## Examples
 
 ```json
-{}
+{
+  "dumpCardMode": true
+}
 ```
 
-## Notes:
+```json
+{
+  "timeout": {
+    "timeInSeconds": 10,
+    "message": "Ingen kontakt med tjeneste. Gå på bussen"
+  }
+}
+```
 
-- Videre har vi lyst til å fastsette hvordan vi vet om device vi får dette fra
-  er en "hovedleser" eller ikke. Om dette skal være en del av meldingen eller om
-  det skal gjøres en form for handshake når device kobles til.
-- Hardware må ha innebygget timeout på N sek, og viser en venterskjerm med en
-  gang. Bruke konfigurasjon til å spesifisere meldinger som skal brukes? Også
-  konfigurere melding dersom timeout forekommer.
-- Konfigurasjon av device til spesifikk lokasjon i bussen (foran, bak, osv)
+```json
+{
+  "dumpCardMode": true,
+  "timeout": {
+    "timeInSeconds": 10,
+    "message": "Ingen kontakt med tjeneste. Gå på bussen"
+  }
+}
+```
