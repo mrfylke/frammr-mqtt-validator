@@ -6,7 +6,7 @@ import { join } from "path";
 import addFormats from "ajv-formats";
 import { TopicName, topicSet } from "@frammr/mqtt-types";
 
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({ allErrors: true, strictTuples: false });
 addFormats(ajv);
 
 export type ValidationOutput =

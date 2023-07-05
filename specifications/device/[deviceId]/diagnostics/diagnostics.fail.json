@@ -1,13 +1,16 @@
 {
-  "traceId": "48b12d1f-6b96-4f70-94f9-f785cef96812",
-  "eventTimestamp": "2023-09-01",
-  "latitudeDegree": 62.734393,
-  "longitudeDegree": 7.150033,
-  "altitude": 124,
-  "messageNumber": 12345,
-  "speedOverGround": 15.3,
-  "trackDegreeTrue": 324,
-  "signalQuality": 1,
-  "numberOfSatellites": 12,
-  "hdop": 2.4
+  "$schema": "./diagnostics.schema.json",
+  "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+  "deviceId": "flv202400004",
+  "eventTimestamp": "2023-04-22T10:28:37.337Z",
+  "manufacturer": "Acme",
+  "model": "NFC2000b",
+  "serial": "F0A222100004",
+  "firmwareVersion": "0.9.6.0",
+  "standardVersion": "1.0.0",
+  "ipAddress": "192.168.99.11",
+  "label": "front",
+  "functionality": ["invalid"],
+  "status": "OK",
+  "statusText": "no errors"
 }

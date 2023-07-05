@@ -78,7 +78,7 @@
     "functionality": {
       "$id": "#/properties/functionality",
       "type": "array",
-      "description": "Hei",
+      "description": "",
       "minItems": 1,
       "items": [
         {

@@ -4,7 +4,6 @@
   "title": "DeviceDiagnostics",
   "type": "object",
   "description": "Diagnostics information for specific device",
-  "additionalProperties": false,
 
   "required": [
     "traceId",
@@ -81,6 +80,7 @@
       "$id": "#/properties/functionality",
       "type": "array",
       "description": "",
+      "minItems": 1,
       "items": [
         {
           "type": "string",
