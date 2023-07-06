@@ -1,0 +1,10 @@
+{
+  "$schema": "./current.schema.json",
+  "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+  "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+  "timeout": {
+    "timeInSeconds": 10,
+    "message": "Ingen kontakt med tjeneste. Gå på bussen"
+  }
+}

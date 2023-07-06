@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://github.com/mrfylke/frammr-mqtt-validator/specifications/validators/[deviceId]/configure/configure.schema.json",
+  "title": "Configure",
+  "type": "object",
+  "description": "Set new configuration",
+  "required": ["traceId", "eventTimestamp"],
+
+  "properties": {
+    "traceId": {
+      "$id": "#/properties/traceId",
+      "type": "string",
+      "format": "uuid",
+      "description": "An unique message identifier - UUID v4"
+    },
+    "eventTimestamp": {
+      "$id": "#/properties/eventTimeStamp",
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp for the time the travelcard was read. UTC in RFC3339 format."
+    },
+    "dumpCardMode": {
+      "$id": "#/properties/dumpCardMode",
+      "type": "boolean",
+      "description": "If the device should be in card dump mode or not. See NFC flow chart."
+    },
+    "timeout": {
+      "$id": "#/properties/timeout",
+      "type": "object",
+      "description": "Settings for timeout behavior with timout in seconds and message when it is timed out. Timeout of 0 will be no timeout (not recommended)",
+      "required": ["timeInSeconds", "message"],
+
+      "properties": {
+        "timeInSeconds": {
+          "$id": "#/properties/timeout/timeInSeconds",
+          "type": "integer",
+          "minimum": 0,
+          "description": "Timeout in seconds. 0 will be no timeout (not recommended)"
+        },
+        "message": {
+          "$id": "#/properties/timeout/message",
+          "type": "string",
+          "description": "Message to show when operation times out."
+        }
+      }
+    }
+  }
+}
