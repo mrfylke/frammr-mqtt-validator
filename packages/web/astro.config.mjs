@@ -6,6 +6,12 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
+
+  site:
+    process.env.NODE_ENV === "production"
+      ? "https://mrfylke.github.io/hwb-standard/"
+      : undefined,
+
   markdown: {
     remarkPlugins: [remarkMermaid],
   },
