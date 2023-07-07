@@ -32,8 +32,14 @@ the specification it self.
 │   └── <a href="./specifications/sensors/location/">location</a>
 └── validators
     ├── [deviceId]
+    │   ├── <a href="./specifications/validators/%5BdeviceId%5D/configure">configure</a>
+    │   │   ├── <a href="./specifications/validators/%5BdeviceId%5D/configure/current">current</a>
+    │   │   └── <a href="./specifications/validators/%5BdeviceId%5D/configure/request">request</a>
     │   └── <a href="./specifications/validators/%5BdeviceId%5D/response">response</a>
     ├── <a href="./specifications/validators/barcode/">barcode</a>
+    ├── <a href="./specifications/validators/configure">configure</a>
+    │   ├── <a href="./specifications/validators/configure/current">current</a>
+    │   └── <a href="./specifications/validators/configure/request">request</a>
     └── <a href="./specifications/validators/nfc/">nfc</a>
         └── apdu
             ├── [deviceId]
