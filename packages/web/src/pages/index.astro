@@ -7,9 +7,9 @@ const data = await Astro.glob("../../../../specifications/**/*.md");
 const tree = createTopicTree(data.map((d) => d.file));
 ---
 
-<Layout title="HW Bus - MQTT Standard">
+<Layout title="HWB Standard">
   <main class="prose lg:prose-xl m-auto">
-    <h1>MQTT HW Bus Standard</h1>
+    <h1>HWB Standard</h1>
 
     {
       data
