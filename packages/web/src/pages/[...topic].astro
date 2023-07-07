@@ -1,0 +1,29 @@
+---
+import { availableTopics } from "../../../types/src";
+import Layout from "../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return availableTopics.map((topic) => {
+    return { params: { topic: topic } };
+  });
+}
+
+const { topic } = Astro.params;
+
+const data = await Astro.glob("../../../../specifications/**/*.md");
+
+if (!topic) {
+  return Astro.redirect("/404", 404);
+}
+const page = data.find((i) => i.file.includes(topic));
+
+if (!page) {
+  return Astro.redirect("/404", 404);
+}
+---
+
+<Layout title="HW Bus - MQTT Standard">
+  <main class="prose lg:prose-xl m-auto">
+    <page.Content />
+  </main>
+</Layout>

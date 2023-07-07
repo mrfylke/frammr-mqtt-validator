@@ -1,0 +1,20 @@
+---
+import { createTopicTree } from "../file-utils";
+import Layout from "../layouts/Layout.astro";
+
+const data = await Astro.glob("../../../../specifications/**/*.md");
+
+const tree = createTopicTree(data.map((d) => d.file));
+---
+
+<Layout title="HW Bus - MQTT Standard">
+  <main class="prose lg:prose-xl m-auto">
+    <h1>MQTT HW Bus Standard</h1>
+
+    {
+      data
+        .filter((d) => !d.file.includes("specifications/README"))
+        .map(({ Content }) => <Content />)
+    }
+  </main>
+</Layout>
