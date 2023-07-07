@@ -1,6 +1,6 @@
 ---
-import { availableTopics } from "../../../types/src";
-import Layout from "../layouts/Layout.astro";
+import { availableTopics } from "../../../../types/src";
+import Layout from "../../layouts/Layout.astro";
 
 export function getStaticPaths() {
   return availableTopics.map((topic) => {
@@ -10,7 +10,7 @@ export function getStaticPaths() {
 
 const { topic } = Astro.params;
 
-const data = await Astro.glob("../../../../specifications/**/*.md");
+const data = await Astro.glob("../../../../../specifications/**/*.md");
 
 if (!topic) {
   return Astro.redirect("/404", 404);
