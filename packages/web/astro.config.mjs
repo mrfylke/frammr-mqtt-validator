@@ -7,10 +7,7 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [tailwind()],
 
-  site:
-    process.env.NODE_ENV === "production"
-      ? "https://mrfylke.github.io/hwb-standard/"
-      : undefined,
+  base: "/hwb-standard",
 
   markdown: {
     remarkPlugins: [remarkMermaid],
