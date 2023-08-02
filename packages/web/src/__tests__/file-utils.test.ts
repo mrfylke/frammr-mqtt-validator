@@ -1,9 +1,5 @@
 import { test, expect } from "vitest";
-import {
-  createTopicTree,
-  printMarkdownTree,
-  type TopicNode,
-} from "../file-utils";
+import { createTopicTree, printHtmlTree, type TopicNode } from "../file-utils";
 
 test("file-utils", () => {
   const tree = createTopicTree([
@@ -67,12 +63,13 @@ test("file-utils print", () => {
   ]);
 
   const expected = `/
-├── [a](/topics/a)
-└── [foo](/topics/foo)
-    ├── [bar](/topics/foo/bar)
-    └── [baz](/topics/foo/baz)
+├── <a href="/topic/a">a</a>
+└── <a href="/topic/foo">foo</a>
+     ├── <a href="/topic/foo/bar">bar</a>
+     └── <a href="/topic/foo/baz">baz</a>
 `;
 
-  const result = printMarkdownTree(tree);
+  const result = printHtmlTree(tree);
+  console.log(result);
   expect(result).toEqual(expected);
 });
