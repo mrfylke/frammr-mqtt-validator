@@ -1,0 +1,17 @@
+---
+import { type TopicNode, printHtmlTree } from "../file-utils";
+
+export interface Props {
+  topicTree: TopicNode;
+}
+
+const { topicTree } = Astro.props;
+const htmlString = printHtmlTree(topicTree);
+---
+
+<aside>
+  <h2>Topic tree</h2>
+
+  <pre
+    class="bg-white text-black leading-5"><Fragment set:html={htmlString} /></pre>
+</aside>

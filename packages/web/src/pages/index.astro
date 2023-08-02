@@ -1,15 +1,19 @@
 ---
 import { createTopicTree } from "../file-utils";
 import Layout from "../layouts/Layout.astro";
+import TopicTree from "../components/TopicTree.astro";
 
 const data = await Astro.glob("../../../../specifications/**/*.md");
-
-const tree = createTopicTree(data.map((d) => d.file));
+const tree = createTopicTree(
+  data.map((d) => d.file).filter((i) => !i.includes("README.md"))
+);
 ---
 
 <Layout title="HWB Standard">
   <main class="prose lg:prose-xl m-auto">
     <h1>HWB Standard</h1>
+
+    <TopicTree topicTree={tree} />
 
     {
       data
