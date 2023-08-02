@@ -70,6 +70,5 @@ test("file-utils print", () => {
 `;
 
   const result = printHtmlTree(tree);
-  console.log(result);
   expect(result).toEqual(expected);
 });
