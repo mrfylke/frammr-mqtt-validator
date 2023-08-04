@@ -40,7 +40,7 @@ export function createTopicTree(filenames: string[]): TopicNode {
 
 export function printHtmlTree(node: TopicNode, indent = ""): string {
   if (!node.children && node.topic) {
-    return `${indent}└── <a href="/topic/${val.topic}">${node.topic}</a>\n`;
+    return `${indent}└── <a href="/topic/${node.topic}">${node.topic}</a>\n`;
   }
   if (!node.children && !node.topic) {
     return ``;
