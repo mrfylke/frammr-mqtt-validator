@@ -1,6 +1,7 @@
 ---
 version: 1.0.0
 lastUpdated: 2023-07-05
+qos: 0
 ---
 
 # Specification: List Current Configuration

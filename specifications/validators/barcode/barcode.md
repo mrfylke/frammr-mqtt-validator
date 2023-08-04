@@ -1,6 +1,7 @@
 ---
 version: 1.0.0
 lastUpdated: 2023-06-01
+qos: 0
 ---
 
 # Specification: barcode

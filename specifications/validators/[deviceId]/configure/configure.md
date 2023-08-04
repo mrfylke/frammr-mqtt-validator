@@ -1,6 +1,7 @@
 ---
 version: 1.0.0
 lastUpdated: 2023-07-05
+qos: 1
 ---
 
 # Specification: Configure specific device
