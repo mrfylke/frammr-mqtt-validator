@@ -139,3 +139,5 @@ packages/validator/specifications
 
 
 .turbo
+
+.DS_Store
