@@ -1,4 +1,4 @@
-# HWB Standard - Message specifications for hardware bus
+![HWB Standard](./assets/hwb-header.jpg)
 
 This repo contains specifications for MQTT message exchange (topic + payload)
 intended for hardware topologies running in busses using MT Bus client for sales
