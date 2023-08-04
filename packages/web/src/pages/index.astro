@@ -3,6 +3,7 @@ import { createTopicTree } from "../file-utils";
 import Layout from "../layouts/Layout.astro";
 import TopicTree from "../components/TopicTree.astro";
 import HardwareTopology from "../../../../markdown/hardware-topology.md";
+import PriorArt from "../../../../markdown/prior-art.md";
 
 const data = await Astro.glob("../../../../specifications/**/*.md");
 const tree = createTopicTree(
@@ -49,6 +50,10 @@ const tree = createTopicTree(
 
       <section>
         <HardwareTopology />
+      </section>
+
+      <section>
+        <PriorArt />
       </section>
     </div>
   </main>
