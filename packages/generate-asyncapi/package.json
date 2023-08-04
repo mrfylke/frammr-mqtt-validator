@@ -1,0 +1,27 @@
+{
+  "name": "@frammr/generate-asyncapi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Test client for validating MQTT messages for Sales Client in Bus",
+  "license": "Apache-2.0",
+  "main": "dist/src/generate.js",
+  "types": "dist/src/generate.d.ts",
+  "scripts": {
+    "start": "tsx src/generate.ts",
+    "build": "tsc --build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@swc-node/register": "^1.6.2",
+    "@swc/core": "^1.3.35",
+    "@types/json-schema": "^7.0.12",
+    "@types/node": "^20.3.2",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@frammr/mqtt-types": "*",
+    "@frammr/mqtt-validator": "*",
+    "front-matter": "^4.0.2"
+  }
+}
