@@ -2,7 +2,7 @@ import { TopicName, availableTopics } from "@frammr/mqtt-types";
 import type { JSONSchema7 } from "json-schema";
 import { basename, join } from "node:path";
 import { readFile } from "node:fs/promises";
-import frontmatter from "front-matter";
+import frontmatter, { FrontMatterResult } from "front-matter";
 
 const meta = require("../../../package.json");
 
@@ -10,12 +10,15 @@ generateDescription().then(console.log);
 
 async function generateDescription() {
   const topicDescriptions = await getTopicDescriptions();
+
+  const intro = await readMarkdown("intro");
+
   const yaml = `
 asyncapi: 2.3.0
 info:
   title: HWB Standard
-  description:
-    $ref: markdown/intro.md
+  description: |
+${indent(intro.body, 4)}
   license:
     name: Apache 2.0
     url: https://frammr.no
@@ -33,12 +36,12 @@ async function getTopicDescriptions() {
     const schemaFile = getSchemaFile(topic);
     const schema = readJsonSchema(schemaFile);
     const descFile = getDescription(topic);
-    const matter = await readFrontmatter(descFile);
+    const desc = await readFrontmatter(descFile);
 
     return `
 ${topic}:
-  description: Melding
-    $ref: ${descFile}
+  description: |
+${indent(desc.body, 4)}
   publish:
     message:
       name: ${schema.title}
@@ -46,10 +49,11 @@ ${topic}:
       payload:
         $ref: ${schemaFile}
       examples:
-        - $ref: ${getExampleFile(topic)}
+        - payload:
+            $ref: ${getExampleFile(topic)}
       bindings:
         mqtt:
-          qos: ${matter.qos}
+          qos: ${desc.attributes.qos}
           retain: false
 `;
   });
@@ -67,6 +71,12 @@ function getDescription(topic: TopicName) {
 function getSchemaFile(topic: TopicName) {
   return `specifications/${topic}/${basename(topic)}.schema.json`;
 }
+async function readMarkdown(file: string) {
+  const fileContents = (
+    await readFile(join(__dirname, "../../../markdown", `${file}.md`))
+  ).toString("utf-8");
+  return frontmatter(fileContents);
+}
 
 function readJsonSchema(file: string) {
   return require(join(__dirname, "../../../", file)) as JSONSchema7;
@@ -75,13 +85,15 @@ function readJsonSchema(file: string) {
 type FrontmatterData = {
   qos: number;
 };
-async function readFrontmatter(file: string): Promise<FrontmatterData> {
+async function readFrontmatter(
+  file: string
+): Promise<FrontMatterResult<FrontmatterData>> {
   const fileContents = (
     await readFile(join(__dirname, "../../../", file))
   ).toString("utf-8");
 
   const matter = frontmatter<FrontmatterData>(fileContents);
-  return matter.attributes;
+  return matter;
 }
 
 function indent(str: string, spaces: number) {
