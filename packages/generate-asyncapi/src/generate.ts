@@ -1,12 +1,23 @@
 import { TopicName, availableTopics } from "@frammr/mqtt-types";
 import type { JSONSchema7 } from "json-schema";
 import { basename, join } from "node:path";
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import frontmatter, { FrontMatterResult } from "front-matter";
 
 const meta = require("../../../package.json");
 
-generateDescription().then(console.log);
+generateDescription().then(function (content) {
+  const filename = process.argv[2];
+  if (!filename) {
+    throw new Error("Provide filename");
+  }
+  saveToOutput(filename, content.trim());
+});
+
+async function saveToOutput(filename: string, content: string) {
+  await writeFile(join(__dirname, "../../../", filename), content);
+  console.log(`Saved to ${filename}`);
+}
 
 async function generateDescription() {
   const topicDescriptions = await getTopicDescriptions();

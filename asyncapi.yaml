@@ -17,6 +17,7 @@ info:
 
 defaultContentType: application/json
 channels:
+
   device/diagnostics:
     description: |
       # Specification: Diagnostics
