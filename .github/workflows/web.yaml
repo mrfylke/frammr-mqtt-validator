@@ -21,6 +21,16 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
 
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "18.x"
+          cache: "yarn"
+
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
       - name: Generating HTML from my AsyncAPI document
         uses: docker://asyncapi/github-action-for-generator:2.1.12
         with:
