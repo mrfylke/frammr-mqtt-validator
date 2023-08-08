@@ -20,6 +20,18 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
+
+      - name: Generating HTML from my AsyncAPI document
+        uses: docker://asyncapi/github-action-for-generator:2.1.12
+        with:
+          template: "@asyncapi/html-template@0.28.3"
+          filepath: asyncapi/asyncapi.yml
+          output: generated-docs/asyncapi
+
+      - name: Make Json Schemas available
+        run: cp -r generated-docs/asyncapi packages/web/public/api
+        shell: bash
+
       - name: Install, build, and upload your site
         uses: withastro/action@v0
         with:

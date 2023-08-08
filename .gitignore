@@ -138,6 +138,8 @@ temp.json
 packages/validator/specifications
 
 
+generated-docs/
+
 .turbo
 
 .DS_Store
