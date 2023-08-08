@@ -35,7 +35,7 @@ jobs:
         uses: docker://asyncapi/github-action-for-generator:2.1.12
         with:
           template: "@asyncapi/html-template@0.28.3"
-          filepath: asyncapi/asyncapi.yml
+          filepath: asyncapi.yml
           output: packages/web/public/api
 
       - name: Install, build, and upload your site
