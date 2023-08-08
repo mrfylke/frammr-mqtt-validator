@@ -36,11 +36,7 @@ jobs:
         with:
           template: "@asyncapi/html-template@0.28.3"
           filepath: asyncapi/asyncapi.yml
-          output: generated-docs/asyncapi
-
-      - name: Make Json Schemas available
-        run: cp -r generated-docs/asyncapi packages/web/public/api
-        shell: bash
+          output: packages/web/public/api
 
       - name: Install, build, and upload your site
         uses: withastro/action@v0
