@@ -7,8 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "create-apidocs": "yarn asyncapi generate fromTemplate asyncapi.yaml @asyncapi/html-template@0.28.3 -o generated-docs/asyncapi --force-write",
-    "generate-asyncapi": "yarn workspace @frammr/generate-asyncapi run start asyncapi.yaml",
+    "create-apidocs": "yarn asyncapi generate fromTemplate asyncapi.yml @asyncapi/html-template@0.28.3 -o generated-docs/asyncapi --force-write",
+    "generate-asyncapi": "yarn workspace @frammr/generate-asyncapi run start asyncapi.yml",
     "run-testclient": "yarn workspace @frammr/mqtt-testclient run start",
     "build": "yarn generate-types && turbo build",
     "generate-types": "yarn workspace @frammr/mqtt-types run generate-types",
