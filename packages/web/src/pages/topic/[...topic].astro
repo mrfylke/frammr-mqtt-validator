@@ -1,6 +1,7 @@
 ---
 import { availableTopics } from "../../../../types/src";
 import Layout from "../../layouts/Layout.astro";
+import { basename } from "node:path";
 
 export function getStaticPaths() {
   return availableTopics.map((topic) => {
@@ -14,7 +15,9 @@ const data = await Astro.glob("../../../../../specifications/**/*.md");
 if (!topic) {
   return Astro.redirect("/404", 404);
 }
-const page = data.find((i) => i.file.includes(topic));
+
+const filename = `${topic}/${basename(topic)}.md`;
+const page = data.find((i) => i.file.includes(filename));
 
 if (!page) {
   return Astro.redirect("/404", 404);
