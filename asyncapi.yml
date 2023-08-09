@@ -86,7 +86,7 @@ channels:
               $ref: specifications/device/diagnostics/diagnostics.example.json
         bindings:
           mqtt:
-            qos: undefined
+            qos: 0
             retain: false
 
   device/[deviceId]/diagnostics:
@@ -198,7 +198,7 @@ channels:
       }
       ```
 
-    publish:
+    subscribe:
       message:
         name: RequestDiagnostics
         schemaFormat: application/schema+json;version=draft-07
@@ -209,7 +209,7 @@ channels:
               $ref: specifications/device/diagnostics/request/request.example.json
         bindings:
           mqtt:
-            qos: undefined
+            qos: 0
             retain: false
 
   validators/nfc:
@@ -456,7 +456,7 @@ channels:
       }
       ```
 
-    publish:
+    subscribe:
       message:
         name: Configure
         schemaFormat: application/schema+json;version=draft-07
@@ -503,7 +503,7 @@ channels:
       }
       ```
 
-    publish:
+    subscribe:
       message:
         name: RequestDiagnosticsDevice
         schemaFormat: application/schema+json;version=draft-07
@@ -578,7 +578,7 @@ channels:
       }
       ```
 
-    publish:
+    subscribe:
       message:
         name: Configure
         schemaFormat: application/schema+json;version=draft-07
@@ -624,7 +624,7 @@ channels:
       }
       ```
 
-    publish:
+    subscribe:
       message:
         name: Validation Response
         schemaFormat: application/schema+json;version=draft-07
@@ -712,7 +712,7 @@ channels:
       }
       ```
 
-    publish:
+    subscribe:
       message:
         name: RequestConfiguration
         schemaFormat: application/schema+json;version=draft-07
@@ -857,7 +857,7 @@ channels:
       }
       ```
 
-    publish:
+    subscribe:
       message:
         name: RequestConfiguration
         schemaFormat: application/schema+json;version=draft-07
@@ -945,7 +945,7 @@ channels:
               $ref: specifications/validators/nfc/apdu/receive/receive.example.json
         bindings:
           mqtt:
-            qos: undefined
+            qos: 1
             retain: false
 
   validators/nfc/apdu/[deviceId]/transmit:
@@ -1013,7 +1013,7 @@ channels:
 
       Link to APDU-documentation.
 
-    publish:
+    subscribe:
       message:
         name: APDU Command Transmit
         schemaFormat: application/schema+json;version=draft-07
@@ -1024,5 +1024,5 @@ channels:
               $ref: specifications/validators/nfc/apdu/[deviceId]/transmit/transmit.example.json
         bindings:
           mqtt:
-            qos: undefined
+            qos: 1
             retain: false

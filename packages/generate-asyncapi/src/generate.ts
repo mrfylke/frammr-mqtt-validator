@@ -53,7 +53,7 @@ async function getTopicDescriptions() {
 ${topic}:
   description: |
 ${indent(desc.body, 4)}
-  publish:
+  ${desc.attributes.direction == "pub" ? "publish" : "subscribe"}:
     message:
       name: ${schema.title}
       schemaFormat: application/schema+json;version=draft-07
@@ -95,6 +95,7 @@ function readJsonSchema(file: string) {
 
 type FrontmatterData = {
   qos: number;
+  direction: "pub" | "sub";
 };
 async function readFrontmatter(
   file: string
