@@ -2,6 +2,7 @@
 version: 1.0.0
 lastUpdated: 2023-07-04
 qos: 0
+direction: pub
 ---
 
 # Specification: nfc

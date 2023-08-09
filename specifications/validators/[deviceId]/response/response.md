@@ -2,6 +2,7 @@
 version: 1.0.0
 lastUpdated: 2023-06-09
 qos: 1
+direction: sub
 ---
 
 # Specification: Validation Response

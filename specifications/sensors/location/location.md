@@ -2,6 +2,7 @@
 version: 1.0.0
 lastUpdated: 2023-05-03
 qos: 0
+direction: pub
 ---
 
 # Specification: Location

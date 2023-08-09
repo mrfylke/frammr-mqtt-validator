@@ -1,6 +1,8 @@
 ---
 version: 1.0.0
 lastUpdated: 2023-06-13
+qos: 0
+direction: pub
 ---
 
 # Specification: Diagnostics
