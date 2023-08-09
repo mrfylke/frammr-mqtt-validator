@@ -18,77 +18,6 @@ info:
 defaultContentType: application/json
 channels:
 
-  device/diagnostics:
-    description: |
-      # Specification: Diagnostics
-
-      Sends diagnostics information for device to sales clients. Could be used by
-      sales clients to show alerts, debug and keep general status of connection
-      information of different devices.
-
-      - Topic: `/device/diagnostics`
-      - Direction: Publish (Inbound to client)
-      - JSON Schema: [diagnostics.schema.json](./diagnostics.schema.json)
-      - MQTT QoS: 0 (Default)
-      - Interval: On device startup and on request
-
-      ## Description
-
-      Devices should respond with diagnostics in two cases: on initial startup and as
-      a response to a diagnostics check. See related topics in next section.
-
-      ## Related topics
-
-      - See same topic on device level: `/device/[deviceId]/diagnostics`
-      - See related topic for requesting `/device/diagnostics/request` and
-        `/device/[deviceId]/diagnostics/request`
-
-      ## Examples
-
-      ```json
-      {
-        "manufacturer": "Acme",
-        "model": "NFC2000b",
-        "serial": "F0A222100004",
-        "firmwareVersion": "0.9.6.0",
-        "standardVersion": "1.0.0",
-        "ipAddress": "192.168.99.11",
-        "label": "front",
-        "functionality": ["nfc", "barcode"],
-        "status": "OK",
-        "statusText": "no errors"
-      }
-      ```
-
-      ```json
-      {
-        "manufacturer": "Acme",
-        "model": "LocOmotive2",
-        "serial": "LL0A222100004",
-        "firmwareVersion": "0.9.0.0",
-        "standardVersion": "1.1.0",
-        "ipAddress": "192.168.99.12",
-        "label": "",
-        "functionality": ["location"],
-        "status": "OK",
-        "statusText": "no errors"
-      }
-      ```
-
-    publish:
-      message:
-        name: Diagnostics
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/device/diagnostics/diagnostics.schema.json
-        examples:
-          - payload:
-              $ref: specifications/device/diagnostics/diagnostics.example.json
-        bindings:
-          mqtt:
-            qos: 0
-            retain: false
-
   device/[deviceId]/diagnostics:
     description: |
       # Specification: Diagnostics
@@ -165,6 +94,124 @@ channels:
             qos: 0
             retain: false
 
+  device/[deviceId]/diagnostics/request:
+    description: |
+      # Specification: Requets Diagnostics on specific Device
+
+      Request diagnostics from a specific device. Can be called periodically by
+      polling from sales client. A request will cause a diagnostics event to be passed
+      from device specidied by `deviceId` in topic.
+
+      - Topic: `/device/[deviceId]/diagnostics/request`
+      - Direction: Consume (Outbound from client)
+      - JSON Schema: [request.schema.json](./request.schema.json)
+      - MQTT QoS: 0 (Default)
+
+      ## Description
+
+      Request diagnostics check from specific device. See related topics in next
+      section.
+
+      ## Related topics
+
+      - Subscribing to topic on device level: `/device/[deviceId]/diagnostics`
+      - Subscribing to all diagnostics: `/device/diagnostics`
+      - See related topic for requesting on all devices `/device/diagnostics/request`
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z"
+      }
+      ```
+
+    subscribe:
+      message:
+        name: RequestDiagnosticsDevice
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/device/[deviceId]/diagnostics/request/request.schema.json
+        examples:
+          - payload:
+              $ref: specifications/device/[deviceId]/diagnostics/request/request.example.json
+        bindings:
+          mqtt:
+            qos: 0
+            retain: false
+
+  device/diagnostics:
+    description: |
+      # Specification: Diagnostics
+
+      Sends diagnostics information for device to sales clients. Could be used by
+      sales clients to show alerts, debug and keep general status of connection
+      information of different devices.
+
+      - Topic: `/device/diagnostics`
+      - Direction: Publish (Inbound to client)
+      - JSON Schema: [diagnostics.schema.json](./diagnostics.schema.json)
+      - MQTT QoS: 0 (Default)
+      - Interval: On device startup and on request
+
+      ## Description
+
+      Devices should respond with diagnostics in two cases: on initial startup and as
+      a response to a diagnostics check. See related topics in next section.
+
+      ## Related topics
+
+      - See same topic on device level: `/device/[deviceId]/diagnostics`
+      - See related topic for requesting `/device/diagnostics/request` and
+        `/device/[deviceId]/diagnostics/request`
+
+      ## Examples
+
+      ```json
+      {
+        "manufacturer": "Acme",
+        "model": "NFC2000b",
+        "serial": "F0A222100004",
+        "firmwareVersion": "0.9.6.0",
+        "standardVersion": "1.0.0",
+        "ipAddress": "192.168.99.11",
+        "label": "front",
+        "functionality": ["nfc", "barcode"],
+        "status": "OK",
+        "statusText": "no errors"
+      }
+      ```
+
+      ```json
+      {
+        "manufacturer": "Acme",
+        "model": "LocOmotive2",
+        "serial": "LL0A222100004",
+        "firmwareVersion": "0.9.0.0",
+        "standardVersion": "1.1.0",
+        "ipAddress": "192.168.99.12",
+        "label": "",
+        "functionality": ["location"],
+        "status": "OK",
+        "statusText": "no errors"
+      }
+      ```
+
+    publish:
+      message:
+        name: Diagnostics
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/device/diagnostics/diagnostics.schema.json
+        examples:
+          - payload:
+              $ref: specifications/device/diagnostics/diagnostics.example.json
+        bindings:
+          mqtt:
+            qos: 0
+            retain: false
+
   device/diagnostics/request:
     description: |
       # Specification: Requets Diagnostics
@@ -207,6 +254,475 @@ channels:
         examples:
           - payload:
               $ref: specifications/device/diagnostics/request/request.example.json
+        bindings:
+          mqtt:
+            qos: 0
+            retain: false
+
+  sensors/location:
+    description: |
+      # Specification: Location
+
+      Provides periodic GPS location data specified in decimal format by latitude and
+      longitude. Should be send once every second. No need for a MQTT QoS guarantee as
+      package loss is acceptable.
+
+      - Topic: `/sensors/location`
+      - Direction: Publish (Inbound to client)
+      - JSON Schema: [location.schema.json](./location.schema.json)
+      - MQTT QoS: 0 (Default)
+      - Interval: Atleast once per second
+
+      #### Description
+
+      Provided periodic location data.
+
+      #### Examples
+
+      ```json
+      {
+        "traceId": "48b12d1f-6b96-4f70-94f9-f785cef96812",
+        "eventTimestamp": "2023-09-01T23:45:52Z",
+        "latitudeDegree": 62.734393,
+        "longitudeDegree": 7.150033,
+        "altitude": 124,
+        "messageNumber": 12345,
+        "speedOverGround": 15.3,
+        "trackDegreeTrue": 324,
+        "signalQuality": 1,
+        "numberOfSatellites": 12,
+        "hdop": 2.4
+      }
+      ```
+
+      ---
+
+      ## Notice:
+
+      Specification based on and should be compatible with Ruter specification. As
+      such it it is licensed under Apache License 2.0 and originally
+      [created by Ruter AS](https://github.com/RuterNo/adt-doc/tree/3.x/asyncapi/json-schemas/sensors/location).
+
+    publish:
+      message:
+        name: Location
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/sensors/location/location.schema.json
+        examples:
+          - payload:
+              $ref: specifications/sensors/location/location.example.json
+        bindings:
+          mqtt:
+            qos: 0
+            retain: false
+
+  validators/[deviceId]/configure:
+    description: |
+      # Specification: Configure specific device
+
+      A method for setting specific configuration for specific device. Can set one or
+      many options at once. Will only overwrite the passed configuration.
+
+      - Topic: `validators/[deviceId]/configure`
+      - Direction: Consume (Outbound from client)
+      - JSON Schema: [configure.schema.json](./configure.schema.json)
+      - MQTT QoS: 1 (at least once)
+      - Trigger: Client setting configuration through UI or automated requests.
+
+      ## Settings
+
+      - `dumpCardMode`: See NFC flow chart for implications of card dump mode.
+      - `timeout`: Settings for timeout behavior with timout in seconds and message
+        when it is timed out. Timeout of 0 will be no timeout (not recommended)
+
+      ## Related
+
+      - Request for sending current: `/validators/[deviceId]/configure/request`
+      - List current configuration: `/validators/[deviceId]/configure/current`
+      - Setting configuration for all devices: `/validators/configure`
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+        "dumpCardMode": true
+      }
+      ```
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+        "timeout": {
+          "timeInSeconds": 10,
+          "message": "Ingen kontakt med tjeneste. Gå på bussen"
+        }
+      }
+      ```
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+        "dumpCardMode": true,
+        "timeout": {
+          "timeInSeconds": 10,
+          "message": "Ingen kontakt med tjeneste. Gå på bussen"
+        }
+      }
+      ```
+
+    subscribe:
+      message:
+        name: Configure
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/[deviceId]/configure/configure.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/[deviceId]/configure/configure.example.json
+        bindings:
+          mqtt:
+            qos: 1
+            retain: false
+
+  validators/[deviceId]/configure/current:
+    description: |
+      # Specification: List Current Configuration
+
+      Subscribe to topic to get list of currently set configuration for specific
+      device. Payload will be similar to `/validators/configure` and
+      `/validators/[deviceId]/configure`.
+
+      - Topic: `/validators/[deviceId]/configure/current`
+      - Direction: Publish (Inbound to client)
+      - JSON Schema: [current.schema.json](./current.schema.json)
+      - MQTT QoS: 0
+      - Trigger: Sales client requesting configuration
+
+      ## Related
+
+      - Request for sending current: `/validators/[deviceId]/configure/request`
+      - Setting new configuration: `/validators/[deviceId]/configure`
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+        "dumpCardMode": true,
+        "timeout": {
+          "timeInSeconds": 10,
+          "message": "Ingen kontakt med tjeneste. Gå på bussen"
+        }
+      }
+      ```
+
+    publish:
+      message:
+        name: CurrentConfiguration
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/[deviceId]/configure/current/current.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/[deviceId]/configure/current/current.example.json
+        bindings:
+          mqtt:
+            qos: 0
+            retain: false
+
+  validators/[deviceId]/configure/request:
+    description: |
+      # Specification: Request Current Configuration
+
+      Request currently set configuration from specific device.
+
+      - Topic: `/validators/[deviceId]/configure/request`
+      - Direction: Consume (Outbound from client)
+      - JSON Schema: [request.schema.json](./request.schema.json)
+      - MQTT QoS: 0
+
+      ## Related
+
+      - Response sent from device: `/validators/[deviceId]/configure/current`
+      - Setting new configuration: `/validators/[deviceId]/configure`
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z"
+      }
+      ```
+
+    subscribe:
+      message:
+        name: RequestConfiguration
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/[deviceId]/configure/request/request.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/[deviceId]/configure/request/request.example.json
+        bindings:
+          mqtt:
+            qos: 0
+            retain: false
+
+  validators/[deviceId]/response:
+    description: |
+      # Specification: Validation Response
+
+      Response sent after finished validation on client. Response can be both success,
+      fail and error. In the current specification the response method is limited to a
+      variant type/enum, and it's up to the device to handle the proper response in
+      form of icon, color and sound.
+
+      Device should optionally recieve title and description if supported by the
+      device.
+
+      - Topic: `validators/[deviceId]/response`
+      - Direction: Consume (Outbound from client)
+      - JSON Schema: [response.schema.json](./response.schema.json)
+      - MQTT QoS: 1 (at least once)
+      - Trigger: After validation result on client
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "48b12d1f-6b96-4f70-94f9-f785cef96812",
+        "eventTimestamp": "2023-09-01T23:45:52Z",
+        "result": {
+          "title": "Godkjent",
+          "description": "Validert 22/04/2020 13:19 Enkeltbillett 1 Voksen ",
+          "validity": "VALID"
+        }
+      }
+      ```
+
+    subscribe:
+      message:
+        name: Validation Response
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/[deviceId]/response/response.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/[deviceId]/response/response.example.json
+        bindings:
+          mqtt:
+            qos: 1
+            retain: false
+
+  validators/barcode:
+    description: |
+      # Specification: barcode
+
+      Passenger want to use the service and presents their barcode containing a token
+      referencing an account containing possible travel rights.
+
+      Barcode should be transmitted as base64 encoded URL string without padding.
+
+      - Topic: `validators/barcode`
+      - Direction: Publish (Inbound to client)
+      - JSON Schema: [barcode.schema.json](./barcode.schema.json)
+      - MQTT QoS: 1 (at least once)
+      - Trigger: Once every time a passenger presents a barcode to the barcode reader.
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "deviceId": "flv202400004",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+        "barcode": "CtYBCtMBCtN...VDRFNBKgsIpdicoAYQ4NeUdzAB"
+      }
+      ```
+
+    publish:
+      message:
+        name: Barcode Validation Request
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/barcode/barcode.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/barcode/barcode.example.json
+        bindings:
+          mqtt:
+            qos: 0
+            retain: false
+
+  validators/configure:
+    description: |
+      # Specification: Configure all devices
+
+      A method for setting configuration for all device at once. Can set one or many
+      options at once. Will only overwrite the passed configuration.
+
+      - Topic: `validators/configure`
+      - Direction: Consume (Outbound from client)
+      - JSON Schema: [configure.schema.json](./configure.schema.json)
+      - MQTT QoS: 1 (at least once)
+      - Trigger: Client setting configuration through UI or automated requests.
+
+      ## Settings
+
+      - `dumpCardMode`: See NFC flow chart for implications of card dump mode.
+      - `timeout`: Settings for timeout behavior with timout in seconds and message
+        when it is timed out. Timeout of 0 will be no timeout (not recommended)
+
+      ## Related
+
+      - Request for sending current: `/validators/configure/request`
+      - List current configuration: `/validators/configure/current`
+      - Setting configuration for specific device: `/validators/[deviceId]/configure`
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+        "dumpCardMode": true
+      }
+      ```
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+        "timeout": {
+          "timeInSeconds": 10,
+          "message": "Ingen kontakt med tjeneste. Gå på bussen"
+        }
+      }
+      ```
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+        "dumpCardMode": true,
+        "timeout": {
+          "timeInSeconds": 10,
+          "message": "Ingen kontakt med tjeneste. Gå på bussen"
+        }
+      }
+      ```
+
+    subscribe:
+      message:
+        name: Configure
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/configure/configure.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/configure/configure.example.json
+        bindings:
+          mqtt:
+            qos: 1
+            retain: false
+
+  validators/configure/current:
+    description: |
+      # Specification: List Current Configuration
+
+      Subscribe to topic to get list of currently set configuration for specific
+      device. Payload will be similar to `/validators/configure` and
+      `/validators/[deviceId]/configure`.
+
+      - Topic: `/validators/configure/current`
+      - Direction: Publish (Inbound to client)
+      - JSON Schema: [current.schema.json](./current.schema.json)
+      - MQTT QoS: 0
+      - Trigger: Sales client requesting configuration
+
+      ## Related
+
+      - Request for sending current: `/validators/[configure/request`
+      - Setting new configuration: `/validators/configure`
+      - For specific device: `/validators/[deviceId]/configure/current`
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+
+        "dumpCardMode": true,
+        "timeout": {
+          "timeInSeconds": 10,
+          "message": "Ingen kontakt med tjeneste. Gå på bussen"
+        }
+      }
+      ```
+
+    publish:
+      message:
+        name: CurrentConfiguration
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/configure/current/current.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/configure/current/current.example.json
+        bindings:
+          mqtt:
+            qos: 0
+            retain: false
+
+  validators/configure/request:
+    description: |
+      # Specification: Request Current Configuration
+
+      Request currently set configuration from all devices.
+
+      - Topic: `/validators/configure/request`
+      - Direction: Consume (Outbound from client)
+      - JSON Schema: [request.schema.json](./request.schema.json)
+      - MQTT QoS: 0
+
+      ## Related
+
+      - Response sent from devices: `/validators/configure/current`
+      - Setting new configuration for all devices: `/validators/configure`
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z"
+      }
+      ```
+
+    subscribe:
+      message:
+        name: RequestConfiguration
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/configure/request/request.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/configure/request/request.example.json
         bindings:
           mqtt:
             qos: 0
@@ -355,599 +871,6 @@ channels:
             qos: 0
             retain: false
 
-  validators/barcode:
-    description: |
-      # Specification: barcode
-
-      Passenger want to use the service and presents their barcode containing a token
-      referencing an account containing possible travel rights.
-
-      Barcode should be transmitted as base64 encoded URL string without padding.
-
-      - Topic: `validators/barcode`
-      - Direction: Publish (Inbound to client)
-      - JSON Schema: [barcode.schema.json](./barcode.schema.json)
-      - MQTT QoS: 1 (at least once)
-      - Trigger: Once every time a passenger presents a barcode to the barcode reader.
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "deviceId": "flv202400004",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-        "barcode": "CtYBCtMBCtN...VDRFNBKgsIpdicoAYQ4NeUdzAB"
-      }
-      ```
-
-    publish:
-      message:
-        name: Barcode Validation Request
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/barcode/barcode.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/barcode/barcode.example.json
-        bindings:
-          mqtt:
-            qos: 0
-            retain: false
-
-  validators/configure:
-    description: |
-      # Specification: Configure all devices
-
-      A method for setting configuration for all device at once. Can set one or many
-      options at once. Will only overwrite the passed configuration.
-
-      - Topic: `validators/configure`
-      - Direction: Consume (Outbound from client)
-      - JSON Schema: [configure.schema.json](./configure.schema.json)
-      - MQTT QoS: 1 (at least once)
-      - Trigger: Client setting configuration through UI or automated requests.
-
-      ## Settings
-
-      - `dumpCardMode`: See NFC flow chart for implications of card dump mode.
-      - `timeout`: Settings for timeout behavior with timout in seconds and message
-        when it is timed out. Timeout of 0 will be no timeout (not recommended)
-
-      ## Related
-
-      - Request for sending current: `/validators/configure/request`
-      - List current configuration: `/validators/configure/current`
-      - Setting configuration for specific device: `/validators/[deviceId]/configure`
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-
-        "dumpCardMode": true
-      }
-      ```
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-
-        "timeout": {
-          "timeInSeconds": 10,
-          "message": "Ingen kontakt med tjeneste. Gå på bussen"
-        }
-      }
-      ```
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-
-        "dumpCardMode": true,
-        "timeout": {
-          "timeInSeconds": 10,
-          "message": "Ingen kontakt med tjeneste. Gå på bussen"
-        }
-      }
-      ```
-
-    subscribe:
-      message:
-        name: Configure
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/configure/configure.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/configure/configure.example.json
-        bindings:
-          mqtt:
-            qos: 1
-            retain: false
-
-  device/[deviceId]/diagnostics/request:
-    description: |
-      # Specification: Requets Diagnostics on specific Device
-
-      Request diagnostics from a specific device. Can be called periodically by
-      polling from sales client. A request will cause a diagnostics event to be passed
-      from device specidied by `deviceId` in topic.
-
-      - Topic: `/device/[deviceId]/diagnostics/request`
-      - Direction: Consume (Outbound from client)
-      - JSON Schema: [request.schema.json](./request.schema.json)
-      - MQTT QoS: 0 (Default)
-
-      ## Description
-
-      Request diagnostics check from specific device. See related topics in next
-      section.
-
-      ## Related topics
-
-      - Subscribing to topic on device level: `/device/[deviceId]/diagnostics`
-      - Subscribing to all diagnostics: `/device/diagnostics`
-      - See related topic for requesting on all devices `/device/diagnostics/request`
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z"
-      }
-      ```
-
-    subscribe:
-      message:
-        name: RequestDiagnosticsDevice
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/device/[deviceId]/diagnostics/request/request.schema.json
-        examples:
-          - payload:
-              $ref: specifications/device/[deviceId]/diagnostics/request/request.example.json
-        bindings:
-          mqtt:
-            qos: 0
-            retain: false
-
-  validators/[deviceId]/configure:
-    description: |
-      # Specification: Configure specific device
-
-      A method for setting specific configuration for specific device. Can set one or
-      many options at once. Will only overwrite the passed configuration.
-
-      - Topic: `validators/[deviceId]/configure`
-      - Direction: Consume (Outbound from client)
-      - JSON Schema: [configure.schema.json](./configure.schema.json)
-      - MQTT QoS: 1 (at least once)
-      - Trigger: Client setting configuration through UI or automated requests.
-
-      ## Settings
-
-      - `dumpCardMode`: See NFC flow chart for implications of card dump mode.
-      - `timeout`: Settings for timeout behavior with timout in seconds and message
-        when it is timed out. Timeout of 0 will be no timeout (not recommended)
-
-      ## Related
-
-      - Request for sending current: `/validators/[deviceId]/configure/request`
-      - List current configuration: `/validators/[deviceId]/configure/current`
-      - Setting configuration for all devices: `/validators/configure`
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-
-        "dumpCardMode": true
-      }
-      ```
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-
-        "timeout": {
-          "timeInSeconds": 10,
-          "message": "Ingen kontakt med tjeneste. Gå på bussen"
-        }
-      }
-      ```
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-
-        "dumpCardMode": true,
-        "timeout": {
-          "timeInSeconds": 10,
-          "message": "Ingen kontakt med tjeneste. Gå på bussen"
-        }
-      }
-      ```
-
-    subscribe:
-      message:
-        name: Configure
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/[deviceId]/configure/configure.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/[deviceId]/configure/configure.example.json
-        bindings:
-          mqtt:
-            qos: 1
-            retain: false
-
-  validators/[deviceId]/response:
-    description: |
-      # Specification: Validation Response
-
-      Response sent after finished validation on client. Response can be both success,
-      fail and error. In the current specification the response method is limited to a
-      variant type/enum, and it's up to the device to handle the proper response in
-      form of icon, color and sound.
-
-      Device should optionally recieve title and description if supported by the
-      device.
-
-      - Topic: `validators/[deviceId]/response`
-      - Direction: Consume (Outbound from client)
-      - JSON Schema: [response.schema.json](./response.schema.json)
-      - MQTT QoS: 1 (at least once)
-      - Trigger: After validation result on client
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "48b12d1f-6b96-4f70-94f9-f785cef96812",
-        "eventTimestamp": "2023-09-01T23:45:52Z",
-        "result": {
-          "title": "Godkjent",
-          "description": "Validert 22/04/2020 13:19 Enkeltbillett 1 Voksen ",
-          "validity": "VALID"
-        }
-      }
-      ```
-
-    subscribe:
-      message:
-        name: Validation Response
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/[deviceId]/response/response.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/[deviceId]/response/response.example.json
-        bindings:
-          mqtt:
-            qos: 1
-            retain: false
-
-  validators/configure/current:
-    description: |
-      # Specification: List Current Configuration
-
-      Subscribe to topic to get list of currently set configuration for specific
-      device. Payload will be similar to `/validators/configure` and
-      `/validators/[deviceId]/configure`.
-
-      - Topic: `/validators/configure/current`
-      - Direction: Publish (Inbound to client)
-      - JSON Schema: [current.schema.json](./current.schema.json)
-      - MQTT QoS: 0
-      - Trigger: Sales client requesting configuration
-
-      ## Related
-
-      - Request for sending current: `/validators/[configure/request`
-      - Setting new configuration: `/validators/configure`
-      - For specific device: `/validators/[deviceId]/configure/current`
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-
-        "dumpCardMode": true,
-        "timeout": {
-          "timeInSeconds": 10,
-          "message": "Ingen kontakt med tjeneste. Gå på bussen"
-        }
-      }
-      ```
-
-    publish:
-      message:
-        name: CurrentConfiguration
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/configure/current/current.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/configure/current/current.example.json
-        bindings:
-          mqtt:
-            qos: 0
-            retain: false
-
-  validators/configure/request:
-    description: |
-      # Specification: Request Current Configuration
-
-      Request currently set configuration from all devices.
-
-      - Topic: `/validators/configure/request`
-      - Direction: Consume (Outbound from client)
-      - JSON Schema: [request.schema.json](./request.schema.json)
-      - MQTT QoS: 0
-
-      ## Related
-
-      - Response sent from devices: `/validators/configure/current`
-      - Setting new configuration for all devices: `/validators/configure`
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z"
-      }
-      ```
-
-    subscribe:
-      message:
-        name: RequestConfiguration
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/configure/request/request.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/configure/request/request.example.json
-        bindings:
-          mqtt:
-            qos: 0
-            retain: false
-
-  sensors/location:
-    description: |
-      # Specification: Location
-
-      Provides periodic GPS location data specified in decimal format by latitude and
-      longitude. Should be send once every second. No need for a MQTT QoS guarantee as
-      package loss is acceptable.
-
-      - Topic: `/sensors/location`
-      - Direction: Publish (Inbound to client)
-      - JSON Schema: [location.schema.json](./location.schema.json)
-      - MQTT QoS: 0 (Default)
-      - Interval: Atleast once per second
-
-      #### Description
-
-      Provided periodic location data.
-
-      #### Examples
-
-      ```json
-      {
-        "traceId": "48b12d1f-6b96-4f70-94f9-f785cef96812",
-        "eventTimestamp": "2023-09-01T23:45:52Z",
-        "latitudeDegree": 62.734393,
-        "longitudeDegree": 7.150033,
-        "altitude": 124,
-        "messageNumber": 12345,
-        "speedOverGround": 15.3,
-        "trackDegreeTrue": 324,
-        "signalQuality": 1,
-        "numberOfSatellites": 12,
-        "hdop": 2.4
-      }
-      ```
-
-      ---
-
-      ## Notice:
-
-      Specification based on and should be compatible with Ruter specification. As
-      such it it is licensed under Apache License 2.0 and originally
-      [created by Ruter AS](https://github.com/RuterNo/adt-doc/tree/3.x/asyncapi/json-schemas/sensors/location).
-
-    publish:
-      message:
-        name: Location
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/sensors/location/location.schema.json
-        examples:
-          - payload:
-              $ref: specifications/sensors/location/location.example.json
-        bindings:
-          mqtt:
-            qos: 0
-            retain: false
-
-  validators/[deviceId]/configure/current:
-    description: |
-      # Specification: List Current Configuration
-
-      Subscribe to topic to get list of currently set configuration for specific
-      device. Payload will be similar to `/validators/configure` and
-      `/validators/[deviceId]/configure`.
-
-      - Topic: `/validators/[deviceId]/configure/current`
-      - Direction: Publish (Inbound to client)
-      - JSON Schema: [current.schema.json](./current.schema.json)
-      - MQTT QoS: 0
-      - Trigger: Sales client requesting configuration
-
-      ## Related
-
-      - Request for sending current: `/validators/[deviceId]/configure/request`
-      - Setting new configuration: `/validators/[deviceId]/configure`
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-
-        "dumpCardMode": true,
-        "timeout": {
-          "timeInSeconds": 10,
-          "message": "Ingen kontakt med tjeneste. Gå på bussen"
-        }
-      }
-      ```
-
-    publish:
-      message:
-        name: CurrentConfiguration
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/[deviceId]/configure/current/current.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/[deviceId]/configure/current/current.example.json
-        bindings:
-          mqtt:
-            qos: 0
-            retain: false
-
-  validators/[deviceId]/configure/request:
-    description: |
-      # Specification: Request Current Configuration
-
-      Request currently set configuration from specific device.
-
-      - Topic: `/validators/[deviceId]/configure/request`
-      - Direction: Consume (Outbound from client)
-      - JSON Schema: [request.schema.json](./request.schema.json)
-      - MQTT QoS: 0
-
-      ## Related
-
-      - Response sent from device: `/validators/[deviceId]/configure/current`
-      - Setting new configuration: `/validators/[deviceId]/configure`
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z"
-      }
-      ```
-
-    subscribe:
-      message:
-        name: RequestConfiguration
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/[deviceId]/configure/request/request.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/[deviceId]/configure/request/request.example.json
-        bindings:
-          mqtt:
-            qos: 0
-            retain: false
-
-  validators/nfc/apdu/receive:
-    description: |
-      # Specification: APDU Receive
-
-      Recieve result from commands passed through transmit topic. Will contain list of
-      results corresponding to the results transmitted, with the same specified
-      `commandId`s.
-
-      `transceiveId` can be used to link `transmit` and `receive` events.
-      `eventTimestamp` is the time the first command result is generated.
-
-      - Topic: `validators/nfc/apdu/receive`
-      - Direction: Publish (Inbound to client)
-      - JSON Schema: [receive.schema.json](./receive.schema.json)
-      - MQTT QoS: 1 (at least once)
-      - Trigger: Result from transmitted commands.
-
-      ## Hex and expected status
-
-      All result frames should be represneted as hex, starting with 0x. See examples.
-      If result of executing command does not match expected status prefix passed in
-      the transmit event, result should be ommited.
-
-      ### `0xAF` and continuation
-
-      Continuation on `0xAF` is handled implicitly if `expStatus` as passed in by
-      transmit is set as `0x00`. See description below.
-
-      #### desfire (native)
-
-      - If `expStatus=0x00` or empty and first bytes in response indicates more data
-        (`0xAF`) the device should fetch all data until end and give result as
-        concatinated byte array.
-      - If `expStatus=0xAF` is transmitted it is not handled automatically by the
-        device.
-
-      ## Related
-
-      See related transmit topic:
-      [`validators/nfc/apdu/[deviceId]/transmit`](../[deviceId]/transmit).
-
-      ## Examples
-
-      ```json
-      {
-        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
-        "deviceId": "flv202400004",
-        "eventTimestamp": "2023-04-22T10:28:37.337Z",
-        "transceiveId": "c28f206d-8016-4d22-b21b-70d8d6d2fea4",
-        "apduType": "desfire",
-        "result": [
-          { "commandId": 1, "frame": "0x00" },
-          { "commandId": 2, "frame": "0x0090800002000280" },
-          { "commandId": 3, "frame": "0x00" },
-          { "commandId": 4, "frame": "" }
-        ]
-      }
-      ```
-
-      ## Additional information
-
-      Link to APDU-documentation.
-
-    publish:
-      message:
-        name: APDU result receive event
-        schemaFormat: application/schema+json;version=draft-07
-        payload:
-          $ref: specifications/validators/nfc/apdu/receive/receive.schema.json
-        examples:
-          - payload:
-              $ref: specifications/validators/nfc/apdu/receive/receive.example.json
-        bindings:
-          mqtt:
-            qos: 1
-            retain: false
-
   validators/nfc/apdu/[deviceId]/transmit:
     description: |
       # Specification: APDU Transmit
@@ -1022,6 +945,83 @@ channels:
         examples:
           - payload:
               $ref: specifications/validators/nfc/apdu/[deviceId]/transmit/transmit.example.json
+        bindings:
+          mqtt:
+            qos: 1
+            retain: false
+
+  validators/nfc/apdu/receive:
+    description: |
+      # Specification: APDU Receive
+
+      Recieve result from commands passed through transmit topic. Will contain list of
+      results corresponding to the results transmitted, with the same specified
+      `commandId`s.
+
+      `transceiveId` can be used to link `transmit` and `receive` events.
+      `eventTimestamp` is the time the first command result is generated.
+
+      - Topic: `validators/nfc/apdu/receive`
+      - Direction: Publish (Inbound to client)
+      - JSON Schema: [receive.schema.json](./receive.schema.json)
+      - MQTT QoS: 1 (at least once)
+      - Trigger: Result from transmitted commands.
+
+      ## Hex and expected status
+
+      All result frames should be represneted as hex, starting with 0x. See examples.
+      If result of executing command does not match expected status prefix passed in
+      the transmit event, result should be ommited.
+
+      ### `0xAF` and continuation
+
+      Continuation on `0xAF` is handled implicitly if `expStatus` as passed in by
+      transmit is set as `0x00`. See description below.
+
+      #### desfire (native)
+
+      - If `expStatus=0x00` or empty and first bytes in response indicates more data
+        (`0xAF`) the device should fetch all data until end and give result as
+        concatinated byte array.
+      - If `expStatus=0xAF` is transmitted it is not handled automatically by the
+        device.
+
+      ## Related
+
+      See related transmit topic:
+      [`validators/nfc/apdu/[deviceId]/transmit`](../[deviceId]/transmit).
+
+      ## Examples
+
+      ```json
+      {
+        "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+        "deviceId": "flv202400004",
+        "eventTimestamp": "2023-04-22T10:28:37.337Z",
+        "transceiveId": "c28f206d-8016-4d22-b21b-70d8d6d2fea4",
+        "apduType": "desfire",
+        "result": [
+          { "commandId": 1, "frame": "0x00" },
+          { "commandId": 2, "frame": "0x0090800002000280" },
+          { "commandId": 3, "frame": "0x00" },
+          { "commandId": 4, "frame": "" }
+        ]
+      }
+      ```
+
+      ## Additional information
+
+      Link to APDU-documentation.
+
+    publish:
+      message:
+        name: APDU result receive event
+        schemaFormat: application/schema+json;version=draft-07
+        payload:
+          $ref: specifications/validators/nfc/apdu/receive/receive.schema.json
+        examples:
+          - payload:
+              $ref: specifications/validators/nfc/apdu/receive/receive.example.json
         bindings:
           mqtt:
             qos: 1

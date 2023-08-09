@@ -43,7 +43,7 @@ ${indent(topicDescriptions, 2)}
 }
 
 async function getTopicDescriptions() {
-  const resultP = availableTopics.map(async function (topic) {
+  const resultP = [...availableTopics].sort().map(async function (topic) {
     const schemaFile = getSchemaFile(topic);
     const schema = readJsonSchema(schemaFile);
     const descFile = getDescription(topic);
