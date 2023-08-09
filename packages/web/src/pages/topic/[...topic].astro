@@ -1,7 +1,12 @@
 ---
 import { availableTopics } from "../../../../types/src";
 import Layout from "../../layouts/Layout.astro";
+import TopHeader from "../../components/TopHeader.astro";
+import TopicTree from "../../components/TopicTree.astro";
+import SpecButtons from "../../components/SpecButtons.astro";
+
 import { basename } from "node:path";
+import { createTopicTree } from "../../file-utils";
 
 export function getStaticPaths() {
   return availableTopics.map((topic) => {
@@ -22,10 +27,25 @@ const page = data.find((i) => i.file.includes(filename));
 if (!page) {
   return Astro.redirect("/404", 404);
 }
+const tree = createTopicTree(
+  data.map((d) => d.file).filter((i) => !i.includes("README.md"))
+);
 ---
 
 <Layout title="HWB Standard">
-  <main class="prose m-auto">
-    <page.Content />
+  <main class="max-w-prose m-auto">
+    <TopHeader isSubpage />
+    <SpecButtons />
+
+    <div class="prose my-16">
+      <page.Content />
+    </div>
+
+    <hr />
+
+    <aside>
+      <h2>Topic specifications</h2>
+      <TopicTree topicTree={tree} topic={topic} />
+    </aside>
   </main>
 </Layout>

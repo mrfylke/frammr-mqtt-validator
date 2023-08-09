@@ -1,10 +1,12 @@
 ---
-import { createTopicTree } from "../file-utils";
-import Layout from "../layouts/Layout.astro";
-import TopicTree from "../components/TopicTree.astro";
 import HardwareTopology from "../../../../markdown/hardware-topology.md";
 import Intro from "../../../../markdown/intro.md";
 import PriorArt from "../../../../markdown/prior-art.md";
+import SpecButtons from "../components/SpecButtons.astro";
+import TopHeader from "../components/TopHeader.astro";
+import TopicTree from "../components/TopicTree.astro";
+import { createTopicTree } from "../file-utils";
+import Layout from "../layouts/Layout.astro";
 
 const data = await Astro.glob("../../../../specifications/**/*.md");
 const tree = createTopicTree(
@@ -14,43 +16,13 @@ const tree = createTopicTree(
 
 <Layout title="HWB Standard">
   <main class="max-w-prose m-auto">
-    <div class="p-16 flex justify-center gap-6 items-center">
-      <img
-        class="max-w-[10rem] mx-auto mb-1 block"
-        src="/hwb.svg"
-        alt="HWB Standard"
-      />
-
-      <div>
-        <h1 class="m-0 font-serif text-4xl font-semibold">HWB Standard</h1>
-        <p>
-          MQTT topic and payload specifications for hardware devices and sales
-          clients.
-        </p>
-      </div>
-    </div>
-
+    <TopHeader />
     <div class="prose">
       <Intro />
-
-      <div class="inline-flex gap-3">
-        <a
-          href="/api"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full no-underline"
-        >
-          API Specifications
-        </a>
-        <a
-          href="/topic/validators/nfc#flow"
-          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full no-underline"
-        >
-          NFC Flow diagram
-        </a>
-      </div>
+      <SpecButtons />
 
       <section>
         <h2>Topic specifications</h2>
-
         <TopicTree topicTree={tree} />
       </section>
 

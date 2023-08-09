@@ -7,3 +7,7 @@
 .topicTree a:hover {
   --tw-text-opacity: 0.4;
 }
+
+.topic-selected {
+  font-weight: bold;
+}

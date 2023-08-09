@@ -1,0 +1,29 @@
+---
+export interface Props {
+  isSubpage?: boolean;
+}
+
+const { isSubpage } = Astro.props;
+---
+
+<div class="p-16 flex justify-center gap-6 items-center">
+  <img
+    class="max-w-[10rem] mx-auto mb-1 block"
+    src="/hwb.svg"
+    alt="HWB Standard"
+  />
+
+  <div>
+    {
+      isSubpage ? (
+        <h1 class="m-0 font-serif text-4xl font-semibold">HWB Standard</h1>
+      ) : (
+        <h2 class="m-0 font-serif text-4xl font-semibold">HWB Standard</h2>
+      )
+    }
+    <p>
+      MQTT topic and payload specifications for hardware devices and sales
+      clients.
+    </p>
+  </div>
+</div>

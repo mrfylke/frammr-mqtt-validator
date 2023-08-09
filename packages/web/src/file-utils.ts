@@ -38,7 +38,11 @@ export function createTopicTree(filenames: string[]): TopicNode {
   return root;
 }
 
-export function printHtmlTree(node: TopicNode, indent = ""): string {
+export function printHtmlTree(
+  node: TopicNode,
+  currentTopic?: string,
+  indent = ""
+): string {
   if (!node.children && node.topic) {
     return `${indent}└── <a href="/topic/${node.topic}">${node.topic}</a>\n`;
   }
@@ -49,15 +53,17 @@ export function printHtmlTree(node: TopicNode, indent = ""): string {
   Object.entries(node.children).forEach(([key, val], index, all) => {
     const isLast = index == all.length - 1;
     const sign = isLast ? "└──" : "├──";
+
     if (val.topic) {
-      result += `${indent}${sign} <a href="/topic/${val.topic}">${key}</a>\n`;
+      const selectedClass = val.topic === currentTopic ? "topic-selected" : "";
+      result += `${indent}${sign} <a href="/topic/${val.topic}" class="${selectedClass}">${key}</a>\n`;
     } else {
       result += `${indent}${sign} ${key}\n`;
     }
 
     if (val.children) {
       const prefixSign = isLast ? " " : "│";
-      result += printHtmlTree(val, `${indent}${prefixSign}    `);
+      result += printHtmlTree(val, currentTopic, `${indent}${prefixSign}    `);
     }
   });
   return result;

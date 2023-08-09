@@ -4,10 +4,11 @@ import { type TopicNode, printHtmlTree } from "../file-utils";
 
 export interface Props {
   topicTree: TopicNode;
+  topic?: string;
 }
 
-const { topicTree } = Astro.props;
-const htmlString = printHtmlTree(topicTree);
+const { topicTree, topic } = Astro.props;
+const htmlString = printHtmlTree(topicTree, topic);
 ---
 
 <div class="not-prose">
