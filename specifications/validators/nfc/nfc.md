@@ -1,5 +1,5 @@
 ---
-version: 1.0.0
+version: 1.0.1
 lastUpdated: 2023-07-04
 qos: 0
 direction: pub
@@ -19,7 +19,7 @@ Token should be transmitted as base64 encoded URL string without padding.
 - Topic: `validators/nfc`
 - Direction: Publish (Inbound to client)
 - JSON Schema: [nfc.schema.json](./nfc.schema.json.json)
-- MQTT QoS: 1 (at least once)
+- MQTT QoS: 0 (at most once)
 - Trigger: Once every time a passenger presents a travel card to the barcode
   reader.
 
