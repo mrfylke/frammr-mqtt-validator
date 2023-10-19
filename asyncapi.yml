@@ -13,7 +13,7 @@ info:
   license:
     name: Apache 2.0
     url: https://frammr.no
-  version: 1.0.0
+  version: 1.0.1
 
 defaultContentType: application/json
 channels:
@@ -744,7 +744,7 @@ channels:
       - Topic: `validators/nfc`
       - Direction: Publish (Inbound to client)
       - JSON Schema: [nfc.schema.json](./nfc.schema.json.json)
-      - MQTT QoS: 1 (at least once)
+      - MQTT QoS: 0 (at most once)
       - Trigger: Once every time a passenger presents a travel card to the barcode
         reader.
 
