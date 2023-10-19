@@ -1,6 +1,6 @@
 {
   "name": "@frammr/mqtt-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "Hardware bus validator CLI tool.",
   "main": "dist/src/index.js",
