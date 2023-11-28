@@ -32,6 +32,9 @@ a response to a diagnostics check. See related topics in next section.
 
 ```json
 {
+  "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+  "deviceId": "flv202400004",
+  "eventTimestamp": "2023-04-22T10:28:37.337Z",
   "manufacturer": "Acme",
   "model": "NFC2000b",
   "serial": "F0A222100004",
@@ -47,6 +50,9 @@ a response to a diagnostics check. See related topics in next section.
 
 ```json
 {
+  "traceId": "543070fe-ef32-11ed-a05b-0242ac120003",
+  "deviceId": "flv202400004",
+  "eventTimestamp": "2023-04-22T10:28:37.337Z",
   "manufacturer": "Acme",
   "model": "LocOmotive2",
   "serial": "LL0A222100004",
