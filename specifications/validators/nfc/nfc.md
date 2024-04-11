@@ -40,6 +40,8 @@ others.
 Only supported type for now is `nsd` and that needs to be set as `type`, for
 future proofing when new types are added.
 
+- `nsd`: Nasjonal Standard Desfire. Data format for ticketing using Mifare Desfire cards. In Norway described by "Håndbok V821 del 18".
+
 ## Examples
 
 ```json
