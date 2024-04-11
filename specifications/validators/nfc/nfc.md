@@ -34,7 +34,7 @@ scenarios when `cardContent` is enabled.
 
 This concept is applicable in situations where the smart card holds various
 types of travel rights and there is a requirement to prioritize among them.
-Examples of such types include NOD (Name Origin Destination), account-based, and
+Examples of such types include NOD (Nasjonal OrdreDatabase), account-based, and
 others.
 
 Only supported type for now is `nsd` and that needs to be set as `type`, for
